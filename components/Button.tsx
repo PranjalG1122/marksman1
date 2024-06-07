@@ -11,7 +11,7 @@ export const variants = cva("rounded-sm font-regular lg:text-base text-sm", {
         "",
       link: "",
       input: "bg-gray-50 border border-gray-300 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gray-200 rounded font-regular lg:text-base text-sm",
-      icon: "lg:h-6 lg:w-6 h-5 w-5",
+      icon: "h-5 w-5",
       iconButton:
         "",
     },
