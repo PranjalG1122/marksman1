@@ -14,7 +14,7 @@ export default function SignUp() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center w-full flex-1 min-h-full bg-hero bg-no-repeat bg-cover bg-center bg-fixed px-4">
+    <main className="flex flex-col items-center justify-center w-full flex-1 min-h-full bg-signUpBackground bg-no-repeat bg-cover bg-center bg-fixed px-4">
       <div className="flex flex-col items-center gap-6 bg-gray-50 rounded w-full max-w-md lg:py-32 py-16 lg:px-16 px-8">
         <Image
           src="/logo.png"
@@ -70,7 +70,7 @@ export default function SignUp() {
           </div>
 
           <Button type="submit" className="w-full">
-            Submit
+           Sign Up
           </Button>
           <p className="lg:text-base text-sm">
             Already have an account? Sign in{" "}
