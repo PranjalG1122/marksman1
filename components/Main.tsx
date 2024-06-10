@@ -1,6 +1,7 @@
 "use client";
 
 import React from 'react';
+import Image from 'next/image';
 
 const Main: React.FC = () => {
   return (
@@ -17,13 +18,13 @@ const Main: React.FC = () => {
         </div>
       </div>
       <div className="flex flex-col gap-2 w-1/2">
-      <div className="flex flex-row gap-2"> 
-        <img src="/home1.png" alt="Image 1" className="w-1/2 rounded-lg" />
-        <img src="/home2.png" alt="Image 2" className="w-1/2 rounded-lg" />
+      <div className="flex flex-row gap-2">
+        <Image src="/home2.png" alt="Image 3" width={500} height={500} className="w-1/2 rounded-lg" />
+        <Image src="/home1.png" alt="Image 1" width={500} height={500} className="w-1/2 rounded-lg" />
       </div>
       <div className="flex flex-row gap-2">
-        <img src="/home3.png" alt="Image 3" className="w-1/2 rounded-lg" />
-        <img src="/home4.png" alt="Image 4" className="w-1/2 rounded-lg" />
+        <Image src="/home4.png" alt="Image 4" width={500} height={500} className="w-1/2 rounded-lg" />
+        <Image src="/home3.png" alt="Image 3" width={500} height={500} className="w-1/2 rounded-lg" />
       </div>
       </div>
     </main>
