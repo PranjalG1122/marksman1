@@ -5,12 +5,26 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Eye, EyeOff } from "react-feather";
+import { SignUpUser } from "@/server/auth";
+import toast from "react-hot-toast";
 
 export default function SignUp() {
   const [viewPassword, setViewPassword] = useState<boolean>(false);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const res = await SignUpUser({ name, email, password });
+    if (!res.sucess) {
+      return toast.error(res.message);
+    }
+    setName("");
+    setEmail("");
+    setPassword("");
+    toast.success(res.message);
   };
 
   return (
@@ -25,7 +39,10 @@ export default function SignUp() {
           className=""
         />
         <h1 className="font-bold lg:text-3xl text-2xl">Sign Up</h1>
-        <form className="flex flex-col items-center gap-6 w-full" onSubmit={handleSubmit}>
+        <form
+          className="flex flex-col items-center gap-6 w-full"
+          onSubmit={handleSubmit}
+        >
           <div className="flex flex-col items-center gap-2 w-full">
             <input
               className={variants({ variant: "input" })}
@@ -35,6 +52,8 @@ export default function SignUp() {
               id="name"
               autoComplete="name"
               required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
             <input
               className={variants({ variant: "input" })}
@@ -44,6 +63,8 @@ export default function SignUp() {
               placeholder="Email"
               autoComplete="email"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <div className="relative w-full">
               <input
@@ -54,6 +75,8 @@ export default function SignUp() {
                 id="password"
                 autoComplete="new-password"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <button
                 type="button"
@@ -70,7 +93,7 @@ export default function SignUp() {
           </div>
 
           <Button type="submit" className="w-full">
-           Sign Up
+            Sign Up
           </Button>
           <p className="lg:text-base text-sm">
             Already have an account? Sign in{" "}

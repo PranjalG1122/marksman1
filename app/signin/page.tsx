@@ -1,16 +1,30 @@
 "use client";
 
 import { Button, variants } from "@/components/Button";
+import { SignInUser } from "@/server/auth";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Eye, EyeOff } from "react-feather";
+import toast from "react-hot-toast";
 
 export default function SignIn() {
   const [viewPassword, setViewPassword] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const router = useRouter();
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    const res = await SignInUser({ email, password });
+    if (!res.sucess) {
+      return toast.error(res.message);
+    }
+
+    router.push("/dashboard");
   };
 
   return (
@@ -38,6 +52,8 @@ export default function SignIn() {
               placeholder="Email"
               autoComplete="email"
               required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <div className="relative w-full">
               <input
@@ -48,6 +64,8 @@ export default function SignIn() {
                 id="password"
                 autoComplete="new-password"
                 required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <button
                 type="button"
