@@ -17,7 +17,7 @@ const Main: React.FC = () => {
         </div>
       </div>
       <div className="flex flex-wrap gap-4 w-1/2">
-        <img src="/image1.jpg" alt="Image 1" className="w-1/2 rounded-lg" />
+        <img src="/home1.png" alt="Image 1" className="w-1/2 rounded-lg" />
         <img src="/image2.jpg" alt="Image 2" className="w-1/2 rounded-lg" />
         <img src="/image3.jpg" alt="Image 3" className="w-1/2 rounded-lg" />
         <img src="/image4.jpg" alt="Image 4" className="w-1/2 rounded-lg" />
