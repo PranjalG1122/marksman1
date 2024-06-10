@@ -17,6 +17,9 @@ importers:
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.0
+      jose:
+        specifier: ^5.4.0
+        version: 5.4.0
       next:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1034,6 +1037,9 @@ packages:
   jiti@1.21.2:
     resolution: {integrity: sha512-UQEooyi4HPsFoxcsJ0uV4qDVBDpPWVI7D0JOaeCUnhcEpjWFQIeSu8Ecpu2mAZS6ee3QGtFewR3UOp60YiveZQ==}
     hasBin: true
+
+  jose@5.4.0:
+    resolution: {integrity: sha512-6rpxTHPAQyWMb9A35BroFl1Sp0ST3DpPcm5EVIxZxdH+e0Hv9fwhyB3XLKFUcHNpdSDnETmBfuPPTTlYz5+USw==}
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -2882,6 +2888,8 @@ snapshots:
       '@pkgjs/parseargs': 0.11.0
 
   jiti@1.21.2: {}
+
+  jose@5.4.0: {}
 
   js-tokens@4.0.0: {}
 
