@@ -1,9 +1,16 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import React from "react";
+import Navbar from "../components/Navbar";
+
+const Home: React.FC = () => {
   return (
-   <main>
-      Home page
-   </main>
+    <main>
+      <Navbar />
+      <section>
+      </section>
+    </main>
   );
-}
+};
+
+export default Home;
