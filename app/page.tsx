@@ -2,6 +2,7 @@
 
 import React from "react";
 import Navbar from "../components/Navbar";
+import Main from "../components/Main";
 
 const Home: React.FC = () => {
   return (
@@ -9,6 +10,7 @@ const Home: React.FC = () => {
       <Navbar />
       <section>
       </section>
+      <Main />
     </main>
   );
 };
