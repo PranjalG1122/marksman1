@@ -1,20 +1,46 @@
 "use client";
 
-import React from 'react';
-import Image from 'next/image';
+import React from "react";
+import Image from "next/image";
+import { Button, variants } from "@/components/Button";
+import Link from "next/link";
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="flex justify-between items-center p-5 bg-white border-b border-gray-200">
-      <div className="flex items-center text-2xl text-gray-800">
-        <a href="" className="mr-2"><img src="/logo.png" alt="Logo Colearn" width={250} height={250} /></a>
+    <nav className="sticky top-0 bg-gray-50 flex justify-between items-center px-8 py-2 border-b border-gray-200">
+      <Link href="/">
+        <Image
+          src="/logo.png"
+          alt="Logo Colearn"
+          width={200}
+          height={200}
+          unoptimized={true}
+        />
+      </Link>
+
+      <div className="flex flex-row items-center gap-4">
+        <a
+          href="#about"
+          className="lg:text-base text-sm text-gray-500 hover:text-gray-400"
+        >
+          About Us
+        </a>
+        <a
+          href="#courses"
+          className="lg:text-base text-sm text-gray-500 hover:text-gray-400"
+        >
+          Courses
+        </a>
+        <a
+          href="#contact"
+          className="lg:text-base text-sm text-gray-500 hover:text-gray-400"
+        >
+          Contact Us
+        </a>
       </div>
-      <div>
-        <a href="#about" className="mx-4 text-lg text-gray-800 hover:text-gray-600">About Us</a>
-        <a href="#courses" className="mx-4 text-lg text-gray-800 hover:text-gray-600">Courses</a>
-        <a href="#contact" className="mx-4 text-lg text-gray-800 hover:text-gray-600">Contact Us</a>
-      </div>
-      <button className="bg-indigo-600 text-white rounded px-4 py-2 text-lg hover:bg-purple-500">Sign Up</button>  
+      <Link href="/signup"
+      className={variants({variant: "primary"})}
+      >Sign Up</Link>
     </nav>
   );
 };

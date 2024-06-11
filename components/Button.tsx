@@ -7,13 +7,12 @@ export const variants = cva("rounded-sm font-regular lg:text-base text-sm", {
     variant: {
       primary:
         "px-4 py-2 bg-indigo-600 rounded font-medium text-white lg:text-base text-sm hover:bg-indigo-700 focus:outline-none transition-all",
-      secondary:
-        "",
-      link: "",
-      input: "bg-gray-50 border border-gray-300 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gray-200 rounded font-regular lg:text-base text-sm",
+      secondary: "",
+
+      input:
+        "bg-gray-50 border border-gray-300 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gray-200 rounded font-regular lg:text-base text-sm",
       icon: "h-5 w-5",
-      iconButton:
-        "",
+      iconButton: "",
     },
   },
   defaultVariants: {

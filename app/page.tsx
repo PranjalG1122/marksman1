@@ -6,10 +6,9 @@ import Main from "../components/Main";
 
 const Home: React.FC = () => {
   return (
-    <main>
+    <main className="w-full">
       <Navbar />
-      <section>
-      </section>
+      <section></section>
       <Main />
     </main>
   );
