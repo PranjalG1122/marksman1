@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 
 const Main: React.FC = () => {
-  const images = ["/home1.jpg", "/home2.jpg", "/home3.png", "/home4.png"];
+  const images = ["/home1.jpg", "/genHome2.jpeg", "/home3.png", "/home2.jpg"];
 
   return (
     <main className="flex justify-between items-center p-12 bg-gray-50">
@@ -28,32 +28,31 @@ const Main: React.FC = () => {
           </button>
         </div>
       </div>
-<<<<<<< HEAD
-      <div className="grid grid-cols-2 grid-rows-2 gap-0">
+      <div className="grid grid-cols-2 grid-rows-2 gap-2">
         {images.map((image, i) => {
           return (
             <Image
               key={i}
               src={image}
               alt={`Image ${i + 1}`}
-              width={300}
-              height={300}
-              className="rounded-lg border border-gray-200"
+              width={400}
+              height={400}
+              className="rounded-lg border border-indigo-200"
             />
           );
-        })}
-=======
-      <div className="flex flex-col gap-2 w-1/2">
+        })}</div>
+
+      {/* <div className="flex flex-col gap-2 w-1/2">
       <div className="flex flex-row gap-2">
-        <Image src="/home2.png" alt="Image 3" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
-        <Image src="/home1.png" alt="Image 1" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
+        <Image src="/home1.jpg" alt="Image 1" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
+        <Image src="/genHome2.jpeg" alt="Image 3" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
       </div>
       <div className="flex flex-row gap-2">
-        <Image src="/home4.png" alt="Image 4" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
         <Image src="/home3.png" alt="Image 3" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
+        <Image src="/Home2.jpg" alt="Image 4" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
       </div>
->>>>>>> 55b6aa9 (feat: homepage)
-      </div>
+      </div> */}
+
     </main>
   );
 };
