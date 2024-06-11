@@ -1,8 +1,9 @@
 "use client";
 
 import React from "react";
-import Navbar from "../components/Navbar";
-import Main from "../components/Main";
+import Navbar from "@/components/Navbar";
+import Main from "@/components/Main";
+import Contact from "@/components/Contact";
 
 const Home: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const Home: React.FC = () => {
       <Navbar />
       <section></section>
       <Main />
+      <Contact />
     </main>
   );
 };

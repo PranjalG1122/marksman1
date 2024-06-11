@@ -28,6 +28,7 @@ const Main: React.FC = () => {
           </button>
         </div>
       </div>
+<<<<<<< HEAD
       <div className="grid grid-cols-2 grid-rows-2 gap-0">
         {images.map((image, i) => {
           return (
@@ -41,6 +42,17 @@ const Main: React.FC = () => {
             />
           );
         })}
+=======
+      <div className="flex flex-col gap-2 w-1/2">
+      <div className="flex flex-row gap-2">
+        <Image src="/home2.png" alt="Image 3" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
+        <Image src="/home1.png" alt="Image 1" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
+      </div>
+      <div className="flex flex-row gap-2">
+        <Image src="/home4.png" alt="Image 4" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
+        <Image src="/home3.png" alt="Image 3" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
+      </div>
+>>>>>>> 55b6aa9 (feat: homepage)
       </div>
     </main>
   );
