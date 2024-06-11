@@ -2,6 +2,8 @@
 
 import React from "react";
 import Image from "next/image";
+import { Button, variants } from "@/components/Button";
+
 
 const Main: React.FC = () => {
   const images = ["/home1.jpg", "/genHome2.jpeg", "/home3.png", "/home2.jpg"];
@@ -20,12 +22,8 @@ const Main: React.FC = () => {
           started with CoLearn today!
         </p>
         <div className="flex space-x-4">
-          <button className="bg-indigo-600 text-white rounded px-4 py-2 text-lg hover:bg-purple-500">
-            Get Started
-          </button>
-          <button className="bg-white text-indigo-600 border border-purple-600 rounded px-4 py-2 text-lg hover:bg-gray-100">
-            Learn More
-          </button>
+          <Button variant="primary">Get Started</Button>
+          <Button variant="secondary">Learn More</Button>
         </div>
       </div>
       <div className="grid grid-cols-2 grid-rows-2 gap-2">
