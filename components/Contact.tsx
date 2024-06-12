@@ -15,7 +15,7 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section className="flex flex-col items-center justify-center py-12 bg-gray-50">
+    <section className="flex flex-col items-center justify-center py-12 bg-gray-50 min-h-container w-full">
       <div className="flex flex-col md:flex-row w-full p-4 md:p-8 max-w-7xl mx-auto">
         <div className="md:w-1/2 p-4">
           <div className="p-8 bg-white rounded-lg shadow-lg border border-grey-400 w-full">

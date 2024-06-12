@@ -8,7 +8,7 @@ const Main: React.FC = () => {
   const images = ["/home1.jpg", "/genHome2.jpeg", "/home3.png", "/home2.jpg"];
 
   return (
-    <main className="flex justify-between items-center w-full flex-1 min-h-container ">
+    <main className="flex justify-between items-center w-full flex-1 min-h-container bg-gray-50 ">
       <div className="flex flex-col items-start gap-4 w-full px-16">
         <h2 className="text-2xl text-indigo-600 font-semibold text-balance">
           The best AI adaptive online course
