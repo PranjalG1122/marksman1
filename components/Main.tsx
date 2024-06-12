@@ -3,13 +3,14 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/Button";
+
 import home1 from "@/public/home1.jpg";
-import genHome2 from "@/public/genHome2.jpeg";
+import home2 from "@/public/home2.jpeg";
 import home3 from "@/public/home3.png";
-import home2 from "@/public/home2.jpg";
+import home4 from "@/public/home4.jpg";
 
 const Main: React.FC = () => {
-  const images = [home1, genHome2, home3, home2];
+  const images = [home1, home2, home3, home4];
 
   return (
     <main className="flex justify-between items-center w-full flex-1 min-h-container bg-gray-50 p-16 gap-32">
