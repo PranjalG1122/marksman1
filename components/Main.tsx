@@ -3,9 +3,13 @@
 import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/Button";
+import home1 from "@/public/home1.jpg";
+import genHome2 from "@/public/genHome2.jpeg";
+import home3 from "@/public/home3.png";
+import home2 from "@/public/home2.jpg";
 
 const Main: React.FC = () => {
-  const images = ["/home1.jpg", "/genHome2.jpeg", "/home3.png", "/home2.jpg"];
+  const images = [home1, genHome2, home3, home2];
 
   return (
     <main className="flex justify-between items-center w-full flex-1 min-h-container bg-gray-50 ">
@@ -33,8 +37,6 @@ const Main: React.FC = () => {
                 key={i}
                 src={image}
                 alt={`Image ${i + 1}`}
-                width={250}
-                height={250}
                 className="rounded-lg border border-indigo-200"
               />
             );
