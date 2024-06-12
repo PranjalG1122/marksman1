@@ -2,55 +2,45 @@
 
 import React from "react";
 import Image from "next/image";
-import { Button, variants } from "@/components/Button";
-
+import { Button } from "@/components/Button";
 
 const Main: React.FC = () => {
   const images = ["/home1.jpg", "/genHome2.jpeg", "/home3.png", "/home2.jpg"];
 
   return (
-    <main className="flex justify-between items-center p-12 bg-gray-50">
-      <div className="max-w-md">
-        <h2 className="text-2xl text-indigo-600 mb-4">
+    <main className="flex justify-between items-center w-full flex-1 min-h-container ">
+      <div className="flex flex-col items-start gap-4 w-full px-16">
+        <h2 className="text-2xl text-indigo-600 font-semibold text-balance">
           The best AI adaptive online course
         </h2>
-        <h1 className="text-4xl font-bold mb-4">
-          Find the best <span className="text-purple-600">courses</span> here
+        <h1 className="text-7xl font-bold">
+          Find the best <span className="text-indigo-600">courses</span> here
         </h1>
-        <p className="text-lg mb-4">
+        <p className="text-lg text-indigo-600 font-semibold">
           Get a personalized learning experience that adapts to your needs. Get
           started with CoLearn today!
         </p>
         <div className="flex space-x-4">
-          <Button variant="primary">Get Started</Button>
+          <Button>Get Started</Button>
           <Button variant="secondary">Learn More</Button>
         </div>
       </div>
-      <div className="grid grid-cols-2 grid-rows-2 gap-2">
-        {images.map((image, i) => {
-          return (
-            <Image
-              key={i}
-              src={image}
-              alt={`Image ${i + 1}`}
-              width={400}
-              height={400}
-              className="rounded-lg border border-indigo-200"
-            />
-          );
-        })}</div>
-
-      {/* <div className="flex flex-col gap-2 w-1/2">
-      <div className="flex flex-row gap-2">
-        <Image src="/home1.jpg" alt="Image 1" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
-        <Image src="/genHome2.jpeg" alt="Image 3" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
+      <div className="w-full flex items-center justify-center">
+        <div className="grid grid-cols-2 grid-rows-2 gap-2">
+          {images.map((image, i) => {
+            return (
+              <Image
+                key={i}
+                src={image}
+                alt={`Image ${i + 1}`}
+                width={250}
+                height={250}
+                className="rounded-lg border border-indigo-200"
+              />
+            );
+          })}
+        </div>
       </div>
-      <div className="flex flex-row gap-2">
-        <Image src="/home3.png" alt="Image 3" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
-        <Image src="/Home2.jpg" alt="Image 4" width={500} height={500} className="w-1/2 rounded-lg border border-indigo-300 shadow-lg" />
-      </div>
-      </div> */}
-
     </main>
   );
 };

@@ -8,16 +8,20 @@ import ContactDetails from "@/components/ContactDetails";
 
 const Home: React.FC = () => {
   return (
-    <main className="w-full">
+    <div className="flex min-h-screen flex-col items-center w-full">
       <Navbar />
-      <Main /> 
-      <section className="flex flex-col items-center justify-center py-12 bg-gray-50">
+      <Main />
+      <section className="flex flex-col items-center justify-center py-12 bg-gray-50 min-h-container">
         <div className="flex flex-col md:flex-row w-full p-4 md:p-8 max-w-7xl mx-auto">
-          <div className="md:w-1/2 p-4"><ContactDetails /></div>
-          <div className="md:w-1/2 p-4"><ContactForm /></div>
+          <div className="md:w-1/2 p-4">
+            <ContactDetails />
+          </div>
+          <div className="md:w-1/2 p-4">
+            <ContactForm />
+          </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 
