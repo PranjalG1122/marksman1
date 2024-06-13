@@ -13,7 +13,7 @@ const Main: React.FC = () => {
   const images = [home1, home2, home3, home4];
 
   return (
-    <main className="flex justify-between items-center w-full flex-1 min-h-container bg-gray-50 p-16 gap-32">
+    <main className="flex justify-between items-center w-full flex-1 min-h-container bg-white p-16 gap-32">
       <div className="flex flex-col items-start gap-4 w-full">
         <h2 className="text-2xl text-indigo-600 font-semibold text-balance">
           The best AI adaptive online course

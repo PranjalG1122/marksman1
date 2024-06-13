@@ -29,7 +29,7 @@ export default function SignIn() {
 
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 min-h-full bg-signInBackground bg-no-repeat bg-cover bg-center bg-fixed px-4">
-      <div className="flex flex-col items-center gap-6 bg-gray-50 rounded w-full max-w-md lg:py-32 py-16 lg:px-16 px-8">
+      <div className="flex flex-col items-center gap-6 bg-white rounded w-full max-w-md lg:py-32 py-16 lg:px-16 px-8">
         <Link href="/">
           <Image
             src="/logo.png"
