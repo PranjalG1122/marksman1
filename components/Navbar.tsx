@@ -5,13 +5,16 @@ import Image from "next/image";
 import { variants } from "@/components/Button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import defaultProfile from "@/public/defaultprofile.jpeg";
+import { ChevronDown } from "react-feather";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 import logo from "@/public/logo.png";
 import icon from "@/public/icon.png";
-import defaultProfile from "@/public/defaultprofile.jpeg";
-import { ChevronDown } from "react-feather";
 
 export default function Navbar() {
+  const size = useWindowSize();
+
   const homePageLinks = [
     {
       href: "#about",
@@ -27,30 +30,17 @@ export default function Navbar() {
     },
   ];
 
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    const windowSizeHandler = () => {
-      setWindowWidth(window.innerWidth);
-    };
-    window.addEventListener("resize", windowSizeHandler);
-
-    return () => {
-      window.removeEventListener("resize", windowSizeHandler);
-    };
-  }, []);
-
   const pathname = usePathname();
 
   return (
     <nav className="sticky top-0 bg-white flex justify-between items-center md:px-8 px-2 h-14 border-b border-gray-200 w-full">
       <Link href="/">
-        <Image
-          src={windowWidth > 768 ? logo : icon}
+        {size.width ? (<Image
+          src={size.width > 768 ? logo : icon}
           alt="logo"
           className="h-8 w-auto"
           unoptimized={true}
-        />
+        />) : (null)}
       </Link>
 
       {pathname === "/" ? (
