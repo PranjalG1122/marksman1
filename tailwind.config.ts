@@ -9,8 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'signUpBackground': "url('../public/forest_signup.jpeg')",
-        'signInBackground': "url('../public/forest_signin.jpg')",
+        'signUpBackground': "url('../public/signup.jpeg')",
+        'signInBackground': "url('../public/signin.jpg')",
       },
     },
   },
