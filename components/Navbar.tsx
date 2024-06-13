@@ -1,48 +1,86 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { Button, variants } from "@/components/Button";
+import { variants } from "@/components/Button";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-const Navbar: React.FC = () => {
+import logo from "@/public/logo.png";
+import icon from "@/public/icon.png";
+import defaultProfile from "@/public/defaultprofile.jpeg";
+import { ChevronDown } from "react-feather";
+
+export default function Navbar() {
+  const homePageLinks = [
+    {
+      href: "#about",
+      text: "About Us",
+    },
+    {
+      href: "#courses",
+      text: "Courses",
+    },
+    {
+      href: "#contact",
+      text: "Contact Us",
+    },
+  ];
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    const windowSizeHandler = () => {
+      setWindowWidth(window.innerWidth);
+    };
+    window.addEventListener("resize", windowSizeHandler);
+
+    return () => {
+      window.removeEventListener("resize", windowSizeHandler);
+    };
+  }, []);
+
+  const pathname = usePathname();
+
   return (
-    <nav className="sticky top-0 bg-white flex justify-between items-center px-8 h-14 border-b border-gray-200 w-full">
+    <nav className="sticky top-0 bg-white flex justify-between items-center md:px-8 px-2 h-14 border-b border-gray-200 w-full">
       <Link href="/">
         <Image
-          src="/logo.png"
-          alt="Logo Colearn"
-          width={200}
-          height={200}
+          src={windowWidth > 768 ? logo : icon}
+          alt="logo"
+          className="h-8 w-auto"
           unoptimized={true}
         />
       </Link>
 
-      <div className="flex flex-row items-center gap-4">
-        <a
-          href="#about"
-          className="lg:text-base text-sm text-white0 hover:text-gray-400"
-        >
-          About Us
-        </a>
-        <a
-          href="#courses"
-          className="lg:text-base text-sm text-white0 hover:text-gray-400"
-        >
-          Courses
-        </a>
-        <a
-          href="#contact"
-          className="lg:text-base text-sm text-white0 hover:text-gray-400"
-        >
-          Contact Us
-        </a>
-      </div>
-      <Link href="/signup" className={variants({ variant: "primary" })}>
-        Sign Up
-      </Link>
+      {pathname === "/" ? (
+        <>
+          <div className="flex flex-row items-center md:gap-6 gap-3">
+            {homePageLinks.map((link, i) => (
+              <Link
+                key={i}
+                href={link.href}
+                className="text-gray-400 font-medium hover:text-gray-500 transition-all"
+              >
+                {link.text}
+              </Link>
+            ))}
+          </div>
+          <Link href="/signup" className={variants({ variant: "primary" })}>
+            Sign Up
+          </Link>
+        </>
+      ) : (
+        <div className="px-2 py-1 flex flex-row items-center gap-2 border border-gray-200 rounded">
+          <Image
+            src={defaultProfile}
+            alt="user"
+            className="rounded-full h-10 w-auto"
+          />
+          <p className="font-medium">John Meow</p>
+          <ChevronDown />
+        </div>
+      )}
     </nav>
   );
-};
-
-export default Navbar;
+}
