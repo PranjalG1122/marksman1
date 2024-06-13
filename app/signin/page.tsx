@@ -29,7 +29,7 @@ export default function SignIn() {
 
   return (
     <main className="flex flex-col items-center justify-center w-full flex-1 min-h-full bg-signInBackground bg-no-repeat bg-cover bg-center bg-fixed px-4">
-      <div className="flex flex-col items-center gap-6 bg-white rounded w-full max-w-md lg:py-32 py-16 lg:px-16 px-8">
+      <div className="flex flex-col items-center gap-6 bg-white rounded w-full max-w-md md:py-32 py-16 md:px-16 px-8">
         <Link href="/">
           <Image
             src="/logo.png"
@@ -40,7 +40,7 @@ export default function SignIn() {
             className=""
           />
         </Link>
-        <h1 className="font-bold lg:text-3xl text-2xl">Sign In</h1>
+        <h1 className="font-bold md:text-3xl text-2xl">Sign In</h1>
         <form
           className="flex flex-col items-center gap-6 w-full"
           onSubmit={handleSubmit}
@@ -86,8 +86,8 @@ export default function SignIn() {
           <Button type="submit" className="w-full">
             Sign In
           </Button>
-          <p className="lg:text-base text-sm">
-            Don't have an account? Sign up{" "}
+          <p className="md:text-base text-sm">
+            Do not have an account? Sign up{" "}
             <Link
               href="/signup"
               className="text-indigo-600 hover:underline focus:outline-none transition-all"

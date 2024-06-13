@@ -4,10 +4,10 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "@/components/Button";
 
-import home1 from "@/public/home1.jpg";
-import home2 from "@/public/home2.jpeg";
-import home3 from "@/public/home3.png";
-import home4 from "@/public/home4.jpg";
+import home1 from "@/public/homePage/home1.jpg";
+import home2 from "@/public/homePage/home2.jpeg";
+import home3 from "@/public/homePage/home3.png";
+import home4 from "@/public/homePage/home4.jpg";
 
 const Main: React.FC = () => {
   const images = [home1, home2, home3, home4];
@@ -31,7 +31,7 @@ const Main: React.FC = () => {
         </div>
       </div>
       <div className="w-full flex items-center justify-center">
-        <div className="grid grid-cols-2 grid-rows-2 gap-2">
+        <div className="md:grid grid-cols-2 grid-rows-2 gap-2 hidden">
           {images.map((image, i) => {
             return (
               <Image
