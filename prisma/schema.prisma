@@ -7,9 +7,57 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum PROFILES {
+  class1
+  class2
+  class3
+  class4
+  class5
+}
+
 model User {
-  id       String @id @default(uuid())
+  id       String   @id @default(uuid())
   name     String
-  email    String @unique
+  email    String   @unique
   password String
+  avatar   PROFILES @default(class1)
+
+  subTopicUserProgress SubTopicUserProgress[]
+}
+
+model Class {
+  id          String @id @default(uuid())
+  classNumber Int    @unique
+
+  chapters Chapter[]
+}
+
+model Chapter {
+  id          String @id @default(uuid())
+  chapterName String
+
+  classId   String
+  class     Class      @relation(fields: [classId], references: [id], onDelete: Cascade)
+  subtopics SubTopic[]
+}
+
+model SubTopic {
+  id              String @id @default(uuid())
+  subtopicName    String
+  subtopicContent String
+
+  subtopicUserProgress SubTopicUserProgress[]
+
+  chapterId String
+  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+}
+
+model SubTopicUserProgress {
+  userId     String
+  subtopicId String
+  completed  Boolean  @default(false)
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subtopic   SubTopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+
+  @@id([userId, subtopicId])
 }
