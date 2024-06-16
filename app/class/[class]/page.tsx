@@ -2,7 +2,7 @@
 
 import ChapterCard from "@/components/ChapterCard";
 import Navbar from "@/components/Navbar";
-import { ChapterProps, ClassProps } from "@/lib/types";
+import { ClassProps } from "@/lib/types";
 import { getClassChapters } from "@/server/class";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -47,9 +47,7 @@ export default function Class({ params }: { params: { class: string } }) {
 
         {chapters &&
           chapters.chapters.map((chapter, i) => (
-            <ChapterCard chapterData={chapter} key={i}
-              chapterNumber={i + 1}
-            />
+            <ChapterCard chapterData={chapter} key={i} chapterNumber={i + 1} />
           ))}
       </div>
     </main>
