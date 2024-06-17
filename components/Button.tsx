@@ -2,11 +2,11 @@ import { cva, VariantProps } from "class-variance-authority";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
-export const variants = cva("font-regular md:text-base text-sm", {
+export const variants = cva("font-regular md:text-sm text-xs", {
   variants: {
     variant: {
       primary:
-        "px-4 py-2 bg-indigo-600 rounded font-medium text-white md:text-base text-sm hover:bg-indigo-500 focus:outline-none transition-all",
+        "px-4 py-2 bg-indigo-600 rounded font-medium text-white hover:bg-indigo-500 focus:outline-none transition-all",
       secondary:
         "bg-white bg-indigo-200 font-semibold text-indigo-900 rounded px-4 py-2 text-lg hover:bg-indigo-300 transition-all",
       input:
