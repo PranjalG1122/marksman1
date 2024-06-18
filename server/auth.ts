@@ -96,20 +96,21 @@ export const SignInUser = async (
     };
   } catch (err) {
     console.error(err);
-    if (err instanceof Error)
-      return {
-        sucess: false,
-        message: err.message,
-      };
 
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
       if (err.code === "P2025") {
         return {
           sucess: false,
-          message: "User not found",
+          message: "Invalid email or password",
         };
       }
     }
+
+    if (err instanceof Error)
+      return {
+        sucess: false,
+        message: err.message,
+      };
 
     return {
       sucess: false,

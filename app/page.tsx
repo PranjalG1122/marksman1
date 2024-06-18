@@ -12,8 +12,8 @@ const Home: React.FC = () => {
     <div className="flex min-h-screen flex-col items-center w-full">
       <Navbar />
       <Main />
-      <Courses/> 
-      <Features/>
+      <Courses />
+      <Features />
       <Contact />
     </div>
   );

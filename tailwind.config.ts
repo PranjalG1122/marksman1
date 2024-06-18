@@ -9,11 +9,11 @@ const config: Config = {
   theme: {
     extend: {
       backgroundImage: {
-        'signUpBackground': "url('../public/signup.jpeg')",
-        'signInBackground': "url('../public/signin.jpg')",
+        signUpBackground: "url('../public/signup.jpeg')",
+        signInBackground: "url('../public/signin.jpg')",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };
 export default config;
