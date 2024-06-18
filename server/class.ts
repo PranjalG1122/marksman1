@@ -14,6 +14,7 @@ export const getClassChapters = async (classNumber: number) => {
         chapters: {
           select: {
             chapterName: true,
+            id: true,
             subtopics: {
               select: {
                 subtopicName: true,
@@ -26,6 +27,6 @@ export const getClassChapters = async (classNumber: number) => {
     });
   } catch (err) {
     console.error(err);
-    return null
+    return null;
   }
 };

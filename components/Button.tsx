@@ -12,7 +12,7 @@ export const variants = cva("font-regular md:text-sm text-xs", {
       input:
         "bg-white border border-gray-300 w-full px-4 py-2 focus:outline-none focus:ring-1 focus:ring-gray-200 rounded font-regular md:text-base text-sm",
       icon: "h-5 w-5",
-      iconButton: "",
+      iconButton: "text-gray-950 hover:bg-gray-200 p-1 rounded transition-all",
     },
   },
   defaultVariants: {

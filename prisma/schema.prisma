@@ -42,9 +42,10 @@ model Chapter {
 }
 
 model SubTopic {
-  id              String @id @default(uuid())
+  id              String            @id @default(uuid())
+  subtopicNumber  Int               @default(autoincrement())
   subtopicName    String
-  subtopicContent String
+  subtopicContent SubTopicContent[]
 
   subtopicUserProgress SubTopicUserProgress[]
 
@@ -52,12 +53,25 @@ model SubTopic {
   chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
 }
 
+model SubTopicContent {
+  id      String       @id @default(uuid())
+  type    SUBTOPICTYPE @default(TEXT)
+  content String
+
+  subtopicId String
+  subtopic   SubTopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+}
+
 model SubTopicUserProgress {
   userId     String
   subtopicId String
-  completed  Boolean  @default(false)
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   subtopic   SubTopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
 
   @@id([userId, subtopicId])
+}
+
+enum SUBTOPICTYPE {
+  IMAGE
+  TEXT
 }

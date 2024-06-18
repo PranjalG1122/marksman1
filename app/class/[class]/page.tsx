@@ -7,11 +7,12 @@ import { getClassChapters } from "@/server/class";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ChevronRight } from "react-feather";
+import toast from "react-hot-toast";
 
 export default function Class({ params }: { params: { class: string } }) {
   const fetchData = async () => {
     const res = await getClassChapters(parseInt(params.class));
-    if (!res) return console.error("Error fetching data");
+    if (!res) return toast.error("Error fetching data");
     setChapters(res);
   };
 
@@ -47,7 +48,9 @@ export default function Class({ params }: { params: { class: string } }) {
 
         {chapters &&
           chapters.chapters.map((chapter, i) => (
-            <ChapterCard chapterData={chapter} key={i} chapterNumber={i + 1} />
+            <ChapterCard chapterData={chapter} key={i} chapterNumber={i + 1}
+              firstSubtopic={chapter.subtopics[0].id}
+            />
           ))}
       </div>
     </main>
