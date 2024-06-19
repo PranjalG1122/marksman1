@@ -6,7 +6,7 @@ function Courses() {
       <div className="flex md:flex-row flex-col items-center justify-center gap-4 w-full">
         {[...Array(5)].map((_, i) => {
           return (
-            <div className="bg-indigo-50 w-full md:max-w-xs h-[400px] flex flex-1 rounded-2xl ">
+            <div key={i} className="bg-indigo-50 w-full md:max-w-xs h-[400px] flex flex-1 rounded-2xl ">
               <p className="text-center font-semibold text-2xl text-indigo-900 m-5">
                 Grade-{i + 1}
               </p>

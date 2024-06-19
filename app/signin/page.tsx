@@ -20,9 +20,7 @@ export default function SignIn() {
     e.preventDefault();
 
     const res = await SignInUser({ email, password });
-    if (!res.sucess) {
-      return toast.error(res.message);
-    }
+    if (!res.success) return toast.error(res.message);
 
     router.push("/dashboard");
   };

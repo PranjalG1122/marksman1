@@ -18,9 +18,8 @@ export default function SignUp() {
     e.preventDefault();
 
     const res = await SignUpUser({ name, email, password });
-    if (!res.sucess) {
-      return toast.error(res.message);
-    }
+    if (!res.success) return toast.error(res.message);
+
     setName("");
     setEmail("");
     setPassword("");

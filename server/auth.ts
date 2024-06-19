@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 import { cookies } from "next/headers";
 import { signJoseToken } from "./jose";
 import { maxAge } from "@/lib/maxAge";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 const prisma = new PrismaClient();
 
@@ -14,20 +15,10 @@ const saltRounds = 10;
 export const SignUpUser = async (
   userInfo: SignUpProps
 ): Promise<{
-  sucess: boolean;
+  success: boolean;
   message: string;
 }> => {
   try {
-    const userExists = await prisma.user.findUnique({
-      where: {
-        email: userInfo.email,
-      },
-    });
-
-    if (userExists) {
-      throw new Error("User already exists");
-    }
-
     const hashedPassword = await bcrypt.hash(userInfo.password, saltRounds);
 
     await prisma.user.create({
@@ -39,19 +30,23 @@ export const SignUpUser = async (
     });
 
     return {
-      sucess: true,
+      success: true,
       message: "User created successfully. Please sign in.",
     };
   } catch (err) {
     console.error(err);
-    if (err instanceof Error) {
+    if (err instanceof PrismaClientKnownRequestError) {
+      if (err.code === "P2002")
+        return { success: false, message: "User already exists" };
+    }
+    if (err instanceof Error)
       return {
-        sucess: false,
+        success: false,
         message: err.message,
       };
-    }
+
     return {
-      sucess: false,
+      success: false,
       message: "An error occured",
     };
   }
@@ -60,7 +55,7 @@ export const SignUpUser = async (
 export const SignInUser = async (
   userInfo: SignInProps
 ): Promise<{
-  sucess: boolean;
+  success: boolean;
   message: string;
 }> => {
   try {
@@ -91,29 +86,28 @@ export const SignInUser = async (
     });
 
     return {
-      sucess: true,
+      success: true,
       message: "Signed in successfully",
     };
   } catch (err) {
     console.error(err);
 
     if (err instanceof Prisma.PrismaClientKnownRequestError) {
-      if (err.code === "P2025") {
+      if (err.code === "P2025")
         return {
-          sucess: false,
+          success: false,
           message: "Invalid email or password",
         };
-      }
     }
 
     if (err instanceof Error)
       return {
-        sucess: false,
+        success: false,
         message: err.message,
       };
 
     return {
-      sucess: false,
+      success: false,
       message: "An error occured",
     };
   }
