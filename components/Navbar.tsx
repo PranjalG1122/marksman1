@@ -34,7 +34,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex flex-row items-center justify-between fixed top-0 left-0 px-4 py-2 border-b border-b-gray-300 bg-white w-full">
+    <nav className="flex flex-row items-center justify-between fixed top-0 left-0 px-8 py-2 border-b border-b-gray-300 bg-white w-full">
       <div className="w-full">
         <Link href="/">
           {size.width ? (
@@ -47,49 +47,28 @@ export default function Navbar() {
           ) : null}
         </Link>
       </div>
-      <div className="flex flex-row items-center justify-center md:gap-6 gap-3 w-full">
-        {homePageLinks.map((link, i) => (
-          <Link
-            key={i}
-            href={link.href}
-            className="text-gray-500 hover:text-gray-600 transition-all"
-          >
-            {link.text}
-          </Link>
-        ))}
-      </div>
+      {pathname === "/" && (
+        <div className="flex flex-row items-center justify-center md:gap-6 gap-3 w-full">
+          {homePageLinks.map((link, i) => (
+            <Link
+              key={i}
+              href={link.href}
+              className="text-gray-500 hover:text-gray-600 transition-all"
+            >
+              {link.text}
+            </Link>
+          ))}
+        </div>
+      )}
       <div className="flex justify-end w-full">
-        <UserProfile />
-      </div>
-      {/* 
-      {pathname === "/" ? (
-        <>
-          <div className="flex flex-row items-center justify-center md:gap-6 gap-3 w-full">
-            {homePageLinks.map((link, i) => (
-              <Link
-                key={i}
-                href={link.href}
-                className="text-indigo-50 hover:text-indigo-200 transition-all"
-              >
-                {link.text}
-              </Link>
-            ))}
-          </div>
-          <Link href="/signup" className={variants({ variant: "primary" }) + " w-full"}>
+        {pathname === "/" ? (
+          <Link href="/signup" className={variants({ variant: "primary" })}>
             Sign Up
           </Link>
-        </>
-      ) : (
-        <div className="px-2 py-1 flex flex-row items-center gap-2 border border-gray-200 rounded">
-          <Image
-            src={defaultprofile}
-            alt="user"
-            className="rounded-full h-10 w-auto"
-          />
-          <p className="font-medium">John Meow</p>
-          <ChevronDown />
-        </div>
-      )} */}
+        ) : (
+          <UserProfile />
+        )}
+      </div>
     </nav>
   );
 }

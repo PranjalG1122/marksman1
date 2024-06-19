@@ -45,7 +45,7 @@ export default function Dashboard() {
     },
   ];
   return (
-    <main className="min-h-container w-full bg-white flex flex-col items-center">
+    <main className="h-screen w-full bg-white flex flex-col items-center justify-center">
       <Navbar />
       <div className="flex flex-col items-center w-full md:gap-8 gap-4 md:p-8 p-4">
         <h1 className="md:text-6xl text-3xl font-bold text-indigo-600">

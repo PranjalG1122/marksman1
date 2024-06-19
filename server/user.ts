@@ -4,6 +4,7 @@ import { cookies } from "next/headers";
 import { decodeJwt } from "jose";
 import { PROFILES, PrismaClient } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
+import { redirect } from "next/navigation";
 
 const prisma = new PrismaClient();
 
@@ -47,4 +48,10 @@ export const fetchUserInfo = async (): Promise<{
     }
     return null;
   }
+};
+
+export const signOutUser = () => {
+  const cookie = cookies();
+  cookie.set("token", "", { expires: new Date(0) });
+  return redirect("/");
 };

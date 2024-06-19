@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { useEffect, useState } from "react";
-import { fetchUserInfo } from "@/server/user";
+import { fetchUserInfo, signOutUser } from "@/server/user";
 import { UserProfileProps } from "@/lib/types";
 
 import class1 from "@/public/mascots/class1.png";
@@ -15,7 +15,6 @@ export default function UserProfile() {
   useEffect(() => {
     (async () => {
       const user = await fetchUserInfo();
-      console.log(user);
       if (!user) return;
       setUser(user);
     })();
@@ -48,7 +47,13 @@ export default function UserProfile() {
             >
               <Settings className="h-4 w-4" /> Settings
             </Link>
-            <Button variant="dropdown" className="w-full">
+            <Button
+              variant="dropdown"
+              className="w-full"
+              onClick={() => {
+                signOutUser();
+              }}
+            >
               <LogOut className="h-4 w-4" /> Sign Out
             </Button>
           </div>
