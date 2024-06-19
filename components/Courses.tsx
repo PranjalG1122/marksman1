@@ -1,7 +1,7 @@
 import React from "react";
 function Courses() {
   return (
-    <div className="flex flex-col items-center w-full gap-4 px-8">
+    <div id="courses" className="flex flex-col items-center justify-center w-full gap-4 px-8 h-screen">
       <h1 className="font-bold text-5xl text-center">Courses</h1>
       <div className="flex md:flex-row flex-col items-center justify-center gap-4 w-full">
         {[...Array(5)].map((_, i) => {

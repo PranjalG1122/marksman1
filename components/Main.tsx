@@ -33,7 +33,7 @@ const Main: React.FC = () => {
       <div className="w-full flex items-center justify-center ">
         <div className="flex-col justify-center items-center gap-2.5 inline-flex">
           <div className="flex justify-start items-end gap-2.5">
-            <div className="w-[300px] h-auto lg:w-[300px] lg:h-[300px]">
+            <div className="w-[250px] h-auto lg:w-[250px] lg:h-[250px]">
               <Image
                 className="rounded-[20px] object-cover"
                 src={home1}
@@ -41,7 +41,7 @@ const Main: React.FC = () => {
                 layout="responsive"
               />
             </div>
-            <div className="w-[250px] h-auto lg:w-[250px] lg:h-[250px]">
+            <div className="w-[200px] h-auto lg:w-[200px] lg:h-[200px]">
               <Image
                 className="rounded-[20px] object-cover"
                 src={home2}
@@ -51,7 +51,7 @@ const Main: React.FC = () => {
             </div>
           </div>
           <div className="flex justify-end items-start gap-2.5">
-            <div className="w-[250px] h-auto md:w-[250px] lg:h-[250px]">
+            <div className="w-[200px] h-auto md:w-[200px] lg:h-[200px]">
               <Image
                 className="rounded-[20px] object-cover"
                 src={home3}
@@ -59,7 +59,7 @@ const Main: React.FC = () => {
                 layout="responsive"
               />
             </div>
-            <div className="w-[300px] h-auto lg:w-[300px] lg:h-[300px]">
+            <div className="w-[250px] h-auto lg:w-[250px] lg:h-[250px]">
               <Image
                 className="rounded-[20px] object-cover"
                 src={home4}

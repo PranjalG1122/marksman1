@@ -1,7 +1,7 @@
 "use server";
 
 import { PrismaClient } from "@prisma/client";
-import { getUserInfo } from "./getUserInfo";
+import { getUserInfo } from "./user";
 
 const prisma = new PrismaClient();
 

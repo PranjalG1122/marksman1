@@ -11,18 +11,19 @@ import { useWindowSize } from "@uidotdev/usehooks";
 import defaultprofile from "@/public/defaultprofile.jpeg";
 import logo from "@/public/logo.png";
 import icon from "@/public/icon.png";
+import UserProfile from "@/components/UserProfile";
 
 export default function Navbar() {
   const size = useWindowSize();
 
   const homePageLinks = [
     {
-      href: "#about",
-      text: "About Us",
-    },
-    {
       href: "#courses",
       text: "Courses",
+    },
+    {
+      href: "#features",
+      text: "Features",
     },
     {
       href: "#contact",
@@ -33,32 +34,48 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="sticky top-0 bg-white flex justify-between items-center md:px-8 px-2 h-14 border-b border-gray-200 w-full">
-      <Link href="/">
-        {size.width ? (
-          <Image
-            src={size.width > 768 ? logo : icon}
-            alt="logo"
-            className="h-8 w-auto"
-            unoptimized={true}
-          />
-        ) : null}
-      </Link>
-
+    <nav className="flex flex-row items-center justify-between fixed top-0 left-0 px-4 py-2 border-b border-b-gray-300 bg-white w-full">
+      <div className="w-full">
+        <Link href="/">
+          {size.width ? (
+            <Image
+              src={size.width > 768 ? logo : icon}
+              alt="logo"
+              className="h-8 w-auto"
+              unoptimized={true}
+            />
+          ) : null}
+        </Link>
+      </div>
+      <div className="flex flex-row items-center justify-center md:gap-6 gap-3 w-full">
+        {homePageLinks.map((link, i) => (
+          <Link
+            key={i}
+            href={link.href}
+            className="text-gray-500 hover:text-gray-600 transition-all"
+          >
+            {link.text}
+          </Link>
+        ))}
+      </div>
+      <div className="flex justify-end w-full">
+        <UserProfile />
+      </div>
+      {/* 
       {pathname === "/" ? (
         <>
-          <div className="flex flex-row items-center md:gap-6 gap-3">
+          <div className="flex flex-row items-center justify-center md:gap-6 gap-3 w-full">
             {homePageLinks.map((link, i) => (
               <Link
                 key={i}
                 href={link.href}
-                className="text-gray-400 font-medium hover:text-gray-500 transition-all"
+                className="text-indigo-50 hover:text-indigo-200 transition-all"
               >
                 {link.text}
               </Link>
             ))}
           </div>
-          <Link href="/signup" className={variants({ variant: "primary" })}>
+          <Link href="/signup" className={variants({ variant: "primary" }) + " w-full"}>
             Sign Up
           </Link>
         </>
@@ -72,7 +89,7 @@ export default function Navbar() {
           <p className="font-medium">John Meow</p>
           <ChevronDown />
         </div>
-      )}
+      )} */}
     </nav>
   );
 }
