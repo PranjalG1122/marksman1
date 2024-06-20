@@ -28,6 +28,7 @@ model User {
 model Class {
   id          String @id @default(uuid())
   classNumber Int    @unique
+  color       COLOR  @default(yellow)
 
   chapters Chapter[]
 }
@@ -74,4 +75,12 @@ model SubTopicUserProgress {
 enum SUBTOPICTYPE {
   IMAGE
   TEXT
+}
+
+enum COLOR {
+  yellow
+  blue
+  purple
+  pink
+  green
 }

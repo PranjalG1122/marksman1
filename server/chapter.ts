@@ -5,12 +5,12 @@ import { getUserInfo } from "./user";
 
 const prisma = new PrismaClient();
 
-const user = getUserInfo();
-if (!user) throw new Error();
-
 export const fetchChapters = async (chapterId: string) => {
+  const user = await getUserInfo();
+  if (!user) throw new Error();
+
   try {
-    const chapter = await prisma.chapter.findUnique({
+    const chapter = await prisma.chapter.findUniqueOrThrow({
       where: {
         id: chapterId,
       },
@@ -58,7 +58,7 @@ export const fetchChapters = async (chapterId: string) => {
 
 export const fetchSubTopicContent = async (subtopicId: string) => {
   try {
-    return await prisma.subTopic.findUnique({
+    return await prisma.subTopic.findUniqueOrThrow({
       where: {
         id: subtopicId,
       },

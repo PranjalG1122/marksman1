@@ -1,15 +1,19 @@
 import Link from "next/link";
 import { Button, variants } from "@/components/Button";
 import { ChapterProps } from "@/lib/types";
+import { colors } from "@/lib/colors";
+import { COLOR } from "@prisma/client";
 
 export default function ChapterCard({
   chapterData,
   chapterNumber,
   firstSubtopic,
+  color,
 }: {
   chapterData: ChapterProps;
   chapterNumber: number;
   firstSubtopic: string;
+  color: COLOR;
 }) {
   return (
     <div className="flex flex-col gap-4 w-full border border-gray-200 shadow-sm rounded p-2">
@@ -35,7 +39,16 @@ export default function ChapterCard({
       </ul>
       <Link
         href={"/chapter/" + chapterData.id + "/" + firstSubtopic}
-        className={variants({ variant: "primary" }) + " w-fit"}
+        className={
+          variants({ variant: "none" }) +
+          " w-fit bg-[--bg-color] hover:bg-[--bg-hover]"
+        }
+        style={
+          {
+            "--bg-color": colors[color][500],
+            "--bg-hover": colors[color][600],
+          } as React.CSSProperties
+        }
       >
         Get Started
       </Link>

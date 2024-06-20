@@ -11,11 +11,6 @@ export interface SignInProps {
   password: string;
 }
 
-export interface ClassProps {
-  chapters: ChapterProps[];
-}
-[];
-
 export interface ChapterProps {
   chapterName: string;
   id: string;
