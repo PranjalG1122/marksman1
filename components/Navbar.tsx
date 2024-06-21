@@ -5,10 +5,8 @@ import Image from "next/image";
 import { variants } from "@/components/Button";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown } from "react-feather";
 import { useWindowSize } from "@uidotdev/usehooks";
 
-import defaultprofile from "@/public/defaultprofile.jpeg";
 import logo from "@/public/logo.png";
 import icon from "@/public/icon.png";
 import UserProfile from "@/components/UserProfile";
@@ -34,7 +32,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="flex flex-row items-center justify-between fixed top-0 left-0 px-8 py-2 border-b border-b-gray-300 bg-white w-full">
+    <nav className="flex flex-row items-center justify-between fixed top-0 left-0 px-8 h-12 border-b border-b-gray-300 bg-white w-full">
       <div className="w-full">
         <Link href="/">
           {size.width ? (

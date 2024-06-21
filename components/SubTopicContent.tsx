@@ -3,7 +3,6 @@ import { fetchSubTopicContent } from "@/server/chapter";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import Image from "next/image";
 
 export default function SubTopicContent({
   params,
@@ -19,8 +18,8 @@ export default function SubTopicContent({
     (async () => {
       const res = await fetchSubTopicContent(params.subtopicId);
       if (!res) {
-        return toast.error("No content found");
-        // return router.push("/dashboard");
+        toast.error("No content found");
+        return router.push("/dashboard");
       }
       console.log(res);
       setSubTopicContent(res.subtopicContent);
@@ -28,15 +27,18 @@ export default function SubTopicContent({
   }, [params.subtopicId]);
 
   return (
-    <ul className="flex flex-col items-center w-full h-full max-h-screen overflow-y-auto border-r p-4 gap-4 border-r-gray-300 scrollbar-thin scrollbar-track-gray-500">
+    <ul className="flex flex-col items-center max-w-3xl w-full h-full max-h-screen p-4 gap-4">
       {subTopicContent &&
         subTopicContent.map((content, i) => {
           return (
-            <li key={i} className="flex items-center justify-center w-full">
+            <li
+              key={i}
+              className="flex flex-row items-center justify-center w-full"
+            >
               {content.type === "TEXT" ? (
-                <p className="p-2 rounded border border-gray-200">{content.content}</p>
+                <p className="">{content.content}</p>
               ) : (
-               <img src={content.content} className="w-1/2 rounded" />
+                <img src={content.content} className="w-1/2 rounded" />
               )}
             </li>
           );

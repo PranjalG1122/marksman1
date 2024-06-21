@@ -9,11 +9,15 @@ import { fetchChapters } from "@/server/chapter";
 import toast from "react-hot-toast";
 import { SubTopicListProps } from "@/lib/types";
 import Link from "next/link";
+import { COLOR } from "@prisma/client";
+import { colors } from "@/lib/colors";
 
 export default function Sidebar({
   params,
+  color,
 }: {
   params: { chapterId: string; subtopicId: string };
+  color: COLOR;
 }) {
   const [subTopics, setSubTopics] = useState<SubTopicListProps[]>();
   const [classNum, setClassNum] = useState<number>();
@@ -23,7 +27,7 @@ export default function Sidebar({
     (async () => {
       if (!params.chapterId) return;
       const res = await fetchChapters(params.chapterId);
-      if (!res) return;
+      if (!res) return toast.error("Error fetching data");
       setClassNum(res.class.classNumber);
       setSubTopics(res.subtopics);
       setChapterName(res.chapterName);
@@ -48,16 +52,27 @@ export default function Sidebar({
                   <Link
                     href={"/chapter/" + params.chapterId + "/" + subtopic.id}
                     className={
-                      "flex flex-row items-center gap-2 p-1 rounded w-full hover:bg-green-400 transition-all " +
-                      (subtopic.id === params.subtopicId && "bg-green-400")
+                      "flex flex-row items-center gap-2 p-1 rounded w-full transition-all hover:bg-[--bg-color] " +
+                      (subtopic.id === params.subtopicId && "bg-[--bg-color]")
+                    }
+                    style={
+                      {
+                        "--bg-color": colors[color][300],
+                      } as React.CSSProperties
                     }
                   >
                     <span
                       className={
                         "flex items-center justify-center h-6 w-6 rounded-full border shadow-sm font-medium " +
                         (subtopic.subtopicUserProgress.length > 0
-                          ? "bg-green-500 border-green-600 text-white"
+                          ? "bg-[--bg-color] border-[--border-color] text-white"
                           : "border-gray-300")
+                      }
+                      style={
+                        {
+                          "--bg-color": colors[color][400],
+                          "--border-color": colors[color][400],
+                        } as React.CSSProperties
                       }
                     >
                       {subtopic.subtopicNumber}
@@ -75,20 +90,6 @@ export default function Sidebar({
               );
             })}
       </ul>
-      <div className="flex flex-row items-center gap-2 p-2 rounded w-full border border-gray-300 shadow-sm">
-        <Image
-          src={defaultprofile}
-          alt="logo"
-          className="rounded-full h-12 w-12"
-        />
-        <div className="flex flex-col items-start w-full md:text-sm text-xs">
-          <p className="font-semibold">John Doe</p>
-          <p className="text-gray-500">johndoe@email.com</p>
-        </div>
-        <Button variant="iconButton">
-          <LogOut />
-        </Button>
-      </div>
     </aside>
   );
 }

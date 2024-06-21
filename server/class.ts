@@ -37,3 +37,25 @@ export const getClassChapters = async (classNumber: number) => {
     return null;
   }
 };
+
+export const fetchChapterColor = async (chapterId: string) => {
+  try {
+    const chapter = await prisma.chapter.findUniqueOrThrow({
+      where: {
+        id: chapterId,
+      },
+      select: {
+        class: {
+          select: {
+            color: true,
+          },
+        },
+      },
+    });
+
+    return chapter.class.color;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
