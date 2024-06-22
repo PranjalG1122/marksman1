@@ -1,12 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { COLOR } from "@prisma/client";
 
 
 interface ClassProps {
   classNumber: number;
-  color: COLOR;
   chapters: {
     chapterName: string;
     subTopics: {
@@ -95,7 +93,7 @@ export default function Create() {
         </div>
 
         {formData.chapters.map((chapter, chapterIndex) => (
-          <div key={chapterIndex} className="flex flex-col w-full gap-2 border p-2 rounded">
+          <div key={chapterIndex} className="flex flex-col w-full gap-4 border p-2 rounded">
             <label>
               Chapter Name:
               <input
@@ -108,7 +106,7 @@ export default function Create() {
             </label>
 
             {chapter.subTopics.map((subTopic, subTopicIndex) => (
-              <div key={subTopicIndex} className="flex flex-col w-full gap-2 ml-4">
+              <div key={subTopicIndex} className="flex flex-col w-full gap-2 ml-4 p-2 border border-gray-300 rounded">
                 <label>
                   SubTopic Name:
                   <input
