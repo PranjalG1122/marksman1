@@ -6,6 +6,7 @@ import Main from "@/components/Main";
 import Contact from "@/components/Contact";
 import Courses from "@/components/Courses";
 import Features from "@/components/Features";
+import Quiz from "./quiz/[quizId]/page";
 
 const Home: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const Home: React.FC = () => {
       <Courses />
       <Features />
       <Contact />
+      <Quiz params={{ quizId: "yourQuizId" }} />
     </div>
   );
 };
