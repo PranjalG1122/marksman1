@@ -8,9 +8,11 @@ import { Button } from "@/components/Button";
 export default function SubTopicContent({
   params,
   subTopics,
+  classNum,
 }: {
   params: { chapterId: string; subtopicId: string };
   subTopics: SubTopicListProps[];
+  classNum: number;
 }) {
   const router = useRouter();
 
