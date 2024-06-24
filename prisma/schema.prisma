@@ -28,7 +28,6 @@ model User {
 model Class {
   id          String @id @default(uuid())
   classNumber Int    @unique
-  color       COLOR  @default(yellow)
 
   chapters Chapter[]
 }
@@ -55,8 +54,7 @@ model SubTopic {
 }
 
 model SubTopicContent {
-  id      String       @id @default(uuid())
-  type    SUBTOPICTYPE @default(TEXT)
+  id      String @id @default(uuid())
   content String
 
   subtopicId String
@@ -70,17 +68,4 @@ model SubTopicUserProgress {
   subtopic   SubTopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
 
   @@id([userId, subtopicId])
-}
-
-enum SUBTOPICTYPE {
-  IMAGE
-  TEXT
-}
-
-enum COLOR {
-  yellow
-  blue
-  purple
-  pink
-  green
 }

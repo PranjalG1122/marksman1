@@ -2,33 +2,61 @@
 
 import Sidebar from "@/components/Sidebar";
 import SubTopicContent from "@/components/SubTopicContent";
-import { fetchChapterColor } from "@/server/class";
-import { COLOR } from "@prisma/client";
+import { SubTopicListProps } from "@/lib/types";
+import { fetchChapters } from "@/server/chapter";
 import { useEffect, useState } from "react";
+import { MessageSquare } from "react-feather";
+import toast from "react-hot-toast";
 
 export default function Chapter({
   params,
 }: {
   params: { chapterId: string; subtopicId: string };
 }) {
-  const [color, setColor] = useState<COLOR>();
+  const [showChat, setShowChat] = useState<boolean>(false);
+
+  const [subTopics, setSubTopics] = useState<SubTopicListProps[]>();
+  const [classNum, setClassNum] = useState<number>();
+  const [chapterName, setChapterName] = useState<string>();
+
   useEffect(() => {
     (async () => {
-      const color = await fetchChapterColor(params.chapterId);
-      if (!color) return;
-      setColor(color);
+      if (!params.chapterId) return;
+      const res = await fetchChapters(params.chapterId);
+      if (!res) return toast.error("Error fetching data");
+      setClassNum(res.class.classNumber);
+      setSubTopics(res.subtopics);
+      setChapterName(res.chapterName);
     })();
-  }, []);
+  }, [params]);
+
   return (
     <main className="flex flex-row items-center w-screen min-h-screen flex-1 h-full">
-      {color && (
+      {chapterName && classNum && subTopics && (
         <>
-          <Sidebar params={params} color={color} />
-          <div className="flex flex-row w-full justify-center min-h-screen h-full flex-1 scrollbar-thin scrollbar-track-gray-500 overflow-y-auto">
-            <SubTopicContent params={params} />
-          </div>
+          <Sidebar
+            chapterName={chapterName}
+            classNum={classNum}
+            subTopics={subTopics}
+            params={params}
+          />
+          <SubTopicContent params={params} subTopics={subTopics} />
         </>
       )}
+      <div className="fixed bottom-10 right-10">
+        <button
+          className="bg- p-4 rounded-full transition-all shadow-md bg-indigo-500 text-white hover:bg-indigo-600"
+          onClick={() => setShowChat(!showChat)}
+        >
+          <MessageSquare />
+        </button>
+
+        {showChat && (
+          <div className="absolute right-0 bottom-12 p-2 rounded bg-gray-50 shadow-md w-full min-w-96">
+            Chatbot
+          </div>
+        )}
+      </div>
     </main>
   );
 }

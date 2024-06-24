@@ -1,19 +1,15 @@
 import Link from "next/link";
-import { Button, variants } from "@/components/Button";
+import { variants } from "@/components/Button";
 import { ChapterProps } from "@/lib/types";
-import { colors } from "@/lib/colors";
-import { COLOR } from "@prisma/client";
 
 export default function ChapterCard({
   chapterData,
   chapterNumber,
   firstSubtopic,
-  color,
 }: {
   chapterData: ChapterProps;
   chapterNumber: number;
   firstSubtopic: string;
-  color: COLOR;
 }) {
   return (
     <div className="flex flex-col gap-4 w-full border border-gray-200 shadow-sm rounded p-2">
@@ -24,7 +20,14 @@ export default function ChapterCard({
         {chapterData.subtopics.map((subtopic, i) => {
           return (
             <li key={i} className="flex flex-row items-center gap-2 w-full">
-              <span className="flex items-center justify-center h-6 w-6 rounded-full border border-gray-300 shadow-sm font-semibold">
+              <span
+                className={
+                  "flex items-center justify-center h-6 w-6 rounded-full border shadow-sm font-semibold " +
+                  (subtopic.subtopicUserProgress.length > 0
+                    ? "bg-indigo-500 border-indigo-600 text-white"
+                    : "border-gray-300")
+                }
+              >
                 {i + 1}
               </span>
               <Link
@@ -39,16 +42,7 @@ export default function ChapterCard({
       </ul>
       <Link
         href={"/chapter/" + chapterData.id + "/" + firstSubtopic}
-        className={
-          variants({ variant: "none" }) +
-          " w-fit bg-[--bg-color] hover:bg-[--bg-hover]"
-        }
-        style={
-          {
-            "--bg-color": colors[color][500],
-            "--bg-hover": colors[color][600],
-          } as React.CSSProperties
-        }
+        className={variants({ variant: "primary" }) + " w-fit"}
       >
         Get Started
       </Link>

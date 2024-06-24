@@ -13,7 +13,6 @@ export const getClassChapters = async (classNumber: number) => {
         classNumber,
       },
       select: {
-        color: true,
         chapters: {
           select: {
             chapterName: true,
@@ -21,6 +20,11 @@ export const getClassChapters = async (classNumber: number) => {
 
             subtopics: {
               select: {
+                subtopicUserProgress: {
+                  select: {
+                    userId: true,
+                  },
+                },
                 subtopicName: true,
                 id: true,
               },
@@ -34,28 +38,6 @@ export const getClassChapters = async (classNumber: number) => {
     if (err instanceof PrismaClientKnownRequestError) {
       if (err.code === "P2025") return redirect("/dashboard");
     }
-    return null;
-  }
-};
-
-export const fetchChapterColor = async (chapterId: string) => {
-  try {
-    const chapter = await prisma.chapter.findUniqueOrThrow({
-      where: {
-        id: chapterId,
-      },
-      select: {
-        class: {
-          select: {
-            color: true,
-          },
-        },
-      },
-    });
-
-    return chapter.class.color;
-  } catch (err) {
-    console.error(err);
     return null;
   }
 };

@@ -26,7 +26,6 @@ export const fetchChapters = async (chapterId: string) => {
             subtopicContent: {
               select: {
                 content: true,
-                type: true,
               },
             },
             subtopicName: true,
@@ -63,12 +62,28 @@ export const fetchSubTopicContent = async (subtopicId: string) => {
         id: subtopicId,
       },
       select: {
+        subtopicName: true,
         subtopicContent: {
           select: {
             content: true,
-            type: true,
           },
         },
+      },
+    });
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+};
+
+export const updateMarkDone = async (subtopicId: string) => {
+  try {
+    const user = await getUserInfo();
+    if (!user) throw new Error();
+    return await prisma.subTopicUserProgress.create({
+      data: {
+        subtopicId,
+        userId: user,
       },
     });
   } catch (err) {

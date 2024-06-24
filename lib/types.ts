@@ -1,4 +1,4 @@
-import { PROFILES, SUBTOPICTYPE } from "@prisma/client";
+import { PROFILES } from "@prisma/client";
 
 export interface SignUpProps {
   name: string;
@@ -20,6 +20,9 @@ export interface ChapterProps {
 export interface SubtopicProps {
   subtopicName: string;
   id: string;
+  subtopicUserProgress: {
+    userId: string;
+  }[];
 }
 
 export interface SubTopicListProps {
@@ -33,7 +36,6 @@ export interface SubTopicListProps {
 [];
 
 export interface SubTopicContentProps {
-  type: SUBTOPICTYPE;
   content: string;
 }
 [];

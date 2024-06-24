@@ -8,18 +8,23 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ChevronRight } from "react-feather";
 import toast from "react-hot-toast";
-import { colors } from "@/lib/colors";
-import { COLOR } from "@prisma/client";
+
+import class1 from "@/public/mascots/class1.png";
+import class2 from "@/public/mascots/class2.png";
+import class3 from "@/public/mascots/class3.png";
+import class4 from "@/public/mascots/class4.png";
+import class5 from "@/public/mascots/class5.png";
+import Image from "next/image";
 
 export default function Class({ params }: { params: { class: string } }) {
   const [chapters, setChapters] = useState<ChapterProps[]>();
-  const [color, setColor] = useState<COLOR>();
+
+  const classImages = [class1, class2, class3, class4, class5];
 
   useEffect(() => {
     (async () => {
       const res = await getClassChapters(parseInt(params.class));
       if (!res) return toast.error("Error fetching data");
-      setColor(res.color);
       setChapters(res.chapters);
     })();
   }, []);
@@ -44,15 +49,22 @@ export default function Class({ params }: { params: { class: string } }) {
           </Link>
         </div>
 
-        <h1 className="md:text-3xl text-2xl font-semibold">
-          Class {params.class}
-        </h1>
+        <div className="w-full flex flex-row items-center gap-2">
+          <Image
+            src={classImages[parseInt(params.class) - 1]}
+            alt="Class 1"
+            className="h-10 w-10"
+          />
 
-        {chapters && color
+          <h1 className="md:text-3xl text-2xl font-semibold">
+            Class {params.class}
+          </h1>
+        </div>
+
+        {chapters
           ? chapters.map((chapter, i) => (
               <ChapterCard
                 chapterData={chapter}
-                color={color}
                 key={i}
                 chapterNumber={i + 1}
                 firstSubtopic={chapter.subtopics[0].id}
