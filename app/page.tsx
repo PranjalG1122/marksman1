@@ -16,7 +16,6 @@ const Home: React.FC = () => {
       <Courses />
       <Features />
       <Contact />
-      <Quiz params={{ quizId: "yourQuizId" }} />
     </div>
   );
 };
