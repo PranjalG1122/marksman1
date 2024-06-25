@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MessageSquare, Send, X } from "react-feather";
+import { ArrowRight, MessageSquare, X, ChevronsDown } from "react-feather";
 
 import class1 from "@/public/mascots/class1.png";
 import class2 from "@/public/mascots/class2.png";
@@ -56,9 +56,9 @@ export default function Chatbot({ classNum }: { classNum: number }) {
       {showChat && (
         <div className="absolute right-0 bottom-16 rounded-lg h-96 bg-gray-50 shadow-lg w-96">
           <div className="px-2 h-12 flex items-center justify-between w-full bg-indigo-500 rounded-t-lg ">
-           <p className="text-white font-medium">Chatbot</p>
-           <button>
-            <X className="h-5 w-5 text-white" onClick={() => setShowChat(false)} />
+           <p className="text-white font-medium p-2">Chatbot</p>
+           <button className="p-2 ">
+            <ChevronsDown className="h-5 w-5 text-white" onClick={() => setShowChat(false)} />
            </button>
           </div>
           <ul className="w-full flex-1 flex flex-col gap-2 p-2 py-auto h-72 overflow-y-auto">
@@ -111,9 +111,9 @@ export default function Chatbot({ classNum }: { classNum: number }) {
             />
             <button
               type="submit"
-              className="bg-gray-200 p-2 rounded hover:bg-gray-300"
+              className="bg-indigo-500 p-2 rounded hover:bg-indigo-600 text-white"
             >
-              <Send className="h-4 w-4" />
+              <ArrowRight className="h-4 w-4" />
             </button>
           </form>
         </div>
