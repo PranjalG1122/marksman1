@@ -45,3 +45,8 @@ export interface UserProfileProps {
   name: string;
   email: string;
 }
+
+export interface ChatBotProps {
+  message: string;
+  type: "user" | "model";
+}
