@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-
+import { useEffect, useRef, useState } from "react";
 
 interface ClassProps {
   classNumber: number;
@@ -9,8 +8,7 @@ interface ClassProps {
     chapterName: string;
     subTopics: {
       subTopicName: string;
-      subTopicContent: string;
-      [key: string]: string;
+      subTopicContent: string[];
     }[];
   }[];
 }
@@ -36,49 +34,87 @@ export default function Create() {
       ...formData,
       chapters: [
         ...formData.chapters,
-        { chapterName: "", subTopics: [{ subTopicName: "", subTopicContent: "" }] },
+        {
+          chapterName: "",
+          subTopics: [{ subTopicName: "", subTopicContent: "" }],
+        },
       ],
     });
   };
 
-  const handleAddSubTopic = (chapterIndex: number) => {
+  const handleClassChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setFormData({ ...formData, class: e.target.value });
+  };
+
+  const handleChapterNameChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    index: number
+  ) => {
     const newChapters = [...formData.chapters];
-    newChapters[chapterIndex].subTopics.push({ subTopicName: "", subTopicContent: "" });
+    newChapters[index].chapterName = e.target.value;
     setFormData({ ...formData, chapters: newChapters });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>, chapterIndex?: number, subTopicIndex?: number) => {
-    const { name, value } = e.target;
-    if (name === "class") {
-      setFormData({ ...formData, class: value });
-    } else if (chapterIndex !== undefined) {
-      const newChapters = [...formData.chapters];
-      if (subTopicIndex !== undefined) {
-        newChapters[chapterIndex].subTopics[subTopicIndex][name] = value;
-      } else {
-        newChapters[chapterIndex][name] = value;
-      }
-      setFormData({ ...formData, chapters: newChapters });
-    }
+  const handleAddSubTopic = (chapterIndex: number) => {
+    const newChapters = [...formData.chapters];
+    newChapters[chapterIndex].subTopics.push({
+      subTopicName: "",
+      subTopicContent: "",
+    });
+    setFormData({ ...formData, chapters: newChapters });
+  };
+
+  const handleDelete = (chapterIndex: number, subTopicIndex: number) => () => {
+    const newChapters = [...formData.chapters];
+    newChapters[chapterIndex].subTopics.splice(subTopicIndex, 1);
+    setFormData({ ...formData, chapters: newChapters });
+  };
+
+  const handleSubTopicNameChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    chapterIndex: number,
+    subTopicIndex: number
+  ) => {
+    const newChapters = [...formData.chapters];
+    newChapters[chapterIndex].subTopics[subTopicIndex].subTopicName =
+      e.target.value;
+    setFormData({ ...formData, chapters: newChapters });
+  };
+
+  const handleSubTopicContentChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement>,
+    chapterIndex: number,
+    subTopicIndex: number
+  ) => {
+    const newChapters = [...formData.chapters];
+    newChapters[chapterIndex].subTopics[subTopicIndex].subTopicContent =
+      e.target.value;
+    setFormData({ ...formData, chapters: newChapters });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
+
     console.log(formData);
   };
 
   return (
     <div className="w-full max-w-3xl mx-auto h-screen flex flex-col gap-4 p-4 items-start">
       <h1 className="text-2xl">Create Page</h1>
-      <form encType="multipart/form-data" onSubmit={handleSubmit} className="flex flex-col w-full gap-4">
+      <form
+        encType="multipart/form-data"
+        onSubmit={handleSubmit}
+        className="flex flex-col w-full gap-4"
+      >
         <div className="flex flex-col w-full gap-2">
           <label>
             Class:
             <select
               name="class"
               id="class"
-              onChange={handleChange}
+              onChange={(e) => {
+                handleClassChange(e);
+              }}
               value={formData.class}
               className="p-2 rounded w-fit border border-gray-300"
             >
@@ -93,51 +129,93 @@ export default function Create() {
         </div>
 
         {formData.chapters.map((chapter, chapterIndex) => (
-          <div key={chapterIndex} className="flex flex-col w-full gap-4 border p-2 rounded">
+          <div
+            key={chapterIndex}
+            className="flex flex-col w-full gap-4 border p-2 rounded shadow-md"
+          >
             <label>
               Chapter Name:
               <input
                 type="text"
                 name="chapterName"
                 value={chapter.chapterName}
-                onChange={(e) => handleChange(e, chapterIndex)}
+                onChange={(e) => handleChapterNameChange(e, chapterIndex)}
                 className="p-2 rounded w-full border border-gray-300"
               />
             </label>
 
-            {chapter.subTopics.map((subTopic, subTopicIndex) => (
-              <div key={subTopicIndex} className="flex flex-col w-full gap-2 ml-4 p-2 border border-gray-300 rounded">
-                <label>
-                  SubTopic Name:
-                  <input
-                    type="text"
-                    name="subTopicName"
-                    value={subTopic.subTopicName}
-                    onChange={(e) => handleChange(e, chapterIndex, subTopicIndex)}
-                    className="p-2 rounded w-full border border-gray-300"
-                  />
-                </label>
-                <label>
-                  SubTopic Content:
-                  <input
-                    type="text"
-                    name="subTopicContent"
-                    value={subTopic.subTopicContent}
-                    onChange={(e) => handleChange(e, chapterIndex, subTopicIndex)}
-                    className="p-2 rounded w-full border border-gray-300"
-                  />
-                </label>
-              </div>
-            ))}
-            <button type="button" onClick={() => handleAddSubTopic(chapterIndex)} className="p-2 bg-green-500 text-white rounded w-fit">
+            {chapter.subTopics.map((subTopic, subTopicIndex) => {
+              const textAreaRef = useRef<HTMLTextAreaElement>(null);
+              useEffect(() => {
+                if (textAreaRef.current !== null) {
+                  textAreaRef.current.style.height = "auto";
+                  textAreaRef.current.style.height =
+                    textAreaRef.current.scrollHeight + "px";
+                }
+              }, [subTopic.subTopicContent]);
+              return (
+                <div
+                  key={subTopicIndex}
+                  className="flex flex-col items-start w-full gap-2 p-2 border border-gray-300 rounded"
+                >
+                  <label className="w-full">
+                    SubTopic Name:
+                    <input
+                      type="text"
+                      name="subTopicName"
+                      value={subTopic.subTopicName}
+                      onChange={(e) =>
+                        handleSubTopicNameChange(e, chapterIndex, subTopicIndex)
+                      }
+                      className="p-2 rounded w-full border border-gray-300"
+                    />
+                  </label>
+                  <label className="w-full">
+                    SubTopic Content:
+                    <textarea
+                      name="subTopicContent"
+                      value={subTopic.subTopicContent}
+                      onChange={(e) =>
+                        handleSubTopicContentChange(
+                          e,
+                          chapterIndex,
+                          subTopicIndex
+                        )
+                      }
+                      ref={textAreaRef}
+                      className="p-2 rounded w-full border border-gray-300 resize-none"
+                    />
+                  </label>
+                  <button
+                    type="button"
+                    className="p-2 bg-red-500 text-white rounded w-fit"
+                    onClick={handleDelete(chapterIndex, subTopicIndex)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              );
+            })}
+            <button
+              type="button"
+              onClick={() => handleAddSubTopic(chapterIndex)}
+              className="p-2 bg-green-500 text-white rounded w-fit"
+            >
               Add SubTopic
             </button>
           </div>
         ))}
-        <button type="button" onClick={handleAddChapter} className="p-2 bg-green-500 text-white rounded w-fit">
+        <button
+          type="button"
+          onClick={handleAddChapter}
+          className="p-2 bg-green-500 text-white rounded w-fit"
+        >
           Add Chapter
         </button>
-        <button type="submit" className="p-2 bg-blue-500 text-white rounded w-fit">
+        <button
+          type="submit"
+          className="p-2 bg-blue-500 text-white rounded w-fit"
+        >
           Submit
         </button>
       </form>

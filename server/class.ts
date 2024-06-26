@@ -3,10 +3,14 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { redirect } from "next/navigation";
+import { getUserInfo } from "@/server/user";
 
 const prisma = new PrismaClient();
 
 export const getClassChapters = async (classNumber: number) => {
+  const user = await getUserInfo();
+  if (!user) throw new Error();
+
   try {
     return await prisma.class.findUniqueOrThrow({
       where: {
@@ -21,6 +25,9 @@ export const getClassChapters = async (classNumber: number) => {
             subtopics: {
               select: {
                 subtopicUserProgress: {
+                  where: {
+                    userId: user,
+                  },
                   select: {
                     userId: true,
                   },
