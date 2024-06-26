@@ -98,6 +98,11 @@ export const SignInUser = async (
           success: false,
           message: "Invalid email or password",
         };
+      else
+        return {
+          success: false,
+          message: "An error occured",
+        };
     }
 
     if (err instanceof Error)

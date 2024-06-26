@@ -85,9 +85,9 @@ export default function SignUp() {
                 className="absolute right-2 top-1/4 text-gray-400"
               >
                 {viewPassword ? (
-                  <EyeOff className={variants({ variant: "icon" })} />
+                  <EyeOff/>
                 ) : (
-                  <Eye className={variants({ variant: "icon" })} />
+                  <Eye  />
                 )}
               </button>
             </div>

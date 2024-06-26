@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/Button";
+import { ArrowLeft } from "react-feather";
 
 export default function SubTopicContent({
   params,
@@ -57,7 +58,16 @@ export default function SubTopicContent({
   return (
     <div className="w-full flex flex-col items-center">
       <nav className="sticky top-0 w-full h-12 flex flex-row items-center justify-between px-4 border-b border-b-gray-300">
-        <h1 className="text-xl font-medium ">{subTopicTitle}</h1>
+        <div className="flex flex-row items-center gap-4">
+          <button
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <ArrowLeft className="w-5 h-5" />
+          </button>
+          <h1 className="text-xl font-medium ">{subTopicTitle}</h1>
+        </div>
         {subTopics.find((subtopic) => subtopic.id === params.subtopicId)
           ?.subtopicUserProgress.length === 0 && (
           <Button onClick={handleMarkDone}>Mark as completed</Button>
