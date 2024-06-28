@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { Button } from "@/components/Button";
 import { ArrowLeft } from "react-feather";
+import SpeakerButton from "@/components/SpeakerButton";
 
 export default function SubTopicContent({
   params,
@@ -97,6 +98,13 @@ export default function SubTopicContent({
                   <span className="block w-96 h-4 bg-gray-100 animate-pulse rounded" />
                 </li>
               ))}
+          <div className="flex justify-start w-full">
+            <SpeakerButton
+            onClick={function (): void {
+              toast.success("playing...");
+            }}
+          />
+          </div>
         </ul>
       </div>
     </div>
