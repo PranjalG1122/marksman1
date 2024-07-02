@@ -18,7 +18,7 @@ export default function SubTopicContent({
 }) {
   const router = useRouter();
 
-  const [subTopicData, setSubTopicData] = useState<SubTopicContentProps[]>();
+  const [subTopicData, setSubTopicData] = useState<string>();
   const [subTopicTitle, setSubTopicTitle] = useState<string>();
 
   useEffect(() => {
@@ -74,38 +74,31 @@ export default function SubTopicContent({
           <Button onClick={handleMarkDone}>Mark as completed</Button>
         )}
       </nav>
-      <div className="min-h-container w-full flex flex-col items-center overflow-y-auto">
-        <ul className="flex flex-col items-center max-w-3xl w-full p-4 gap-4">
-          {subTopicData
-            ? subTopicData.map((content, i) => {
-                return (
-                  <li
-                    key={i}
-                    className="flex flex-row items-center justify-center w-full"
-                  >
-                    <p className="">{content.content}</p>
-                  </li>
-                );
-              })
-            : [...Array(4)].map((_, i) => (
-                <li
-                  key={i}
-                  className="flex flex-col items-start gap-2 w-full p-4 rounded"
-                >
-                  <span className="block w-full h-4 bg-gray-100 animate-pulse rounded" />
-                  <span className="block w-96 h-4 bg-gray-100 animate-pulse rounded" />{" "}
-                  <span className="block w-full h-4 bg-gray-100 animate-pulse rounded" />
-                  <span className="block w-96 h-4 bg-gray-100 animate-pulse rounded" />
-                </li>
-              ))}
-          <div className="flex justify-start w-full">
-            <SpeakerButton
+      <div className="min-h-container w-full flex flex-col items-start overflow-y-auto max-w-3xl gap-4 py-4">
+        {subTopicData ? (
+          <p className="text-lg">{subTopicData}</p>
+        ) : (
+          <ul className="flex flex-col items-startw-full p-4 gap-4">
+            {[...Array(4)].map((_, i) => (
+              <li
+                key={i}
+                className="flex flex-col items-start gap-2 w-full p-4 rounded"
+              >
+                <span className="block w-full h-4 bg-gray-100 animate-pulse rounded" />
+                <span className="block w-96 h-4 bg-gray-100 animate-pulse rounded" />{" "}
+                <span className="block w-full h-4 bg-gray-100 animate-pulse rounded" />
+                <span className="block w-96 h-4 bg-gray-100 animate-pulse rounded" />
+              </li>
+            ))}
+          </ul>
+        )}
+        <div className="flex justify-start w-full">
+          <SpeakerButton
             onClick={function (): void {
               toast.success("playing...");
             }}
           />
-          </div>
-        </ul>
+        </div>
       </div>
     </div>
   );

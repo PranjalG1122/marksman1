@@ -4,7 +4,7 @@ export default function Quiz({ params }: { params: { quizId: string } }) {
   return (
     <div className="flex min-h-screen flex-col items-center w-full">
       <Navbar />
-      <div className="w-full px-4 lg:px-lg py-lg flex flex-col lg:flex-row justify-start items-start gap">
+      <div className="w-full px-4 lg:px-lg py-lg flex flex-col lg:flex-row justify-start items-start gap pt-16">
         <div className="w-full lg:w-1/3 flex flex-col justify-start items-start gap-8">
           <div className="text-black text-3xl lg:text-4xl font-normal font-['Inter'] mb-4">
             Chapter 1: Numbers

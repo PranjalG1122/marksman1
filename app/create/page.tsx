@@ -1,49 +1,28 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-
-interface ClassProps {
-  classNumber: number;
-  chapters: {
-    chapterName: string;
-    subTopics: {
-      subTopicName: string;
-      subTopicContent: string[];
-    }[];
-  }[];
-}
+import { ClassProps } from "@/lib/types";
+import { addNewContent } from "@/server/create";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 export default function Create() {
-  const [formData, setFormData] = useState({
-    class: "",
+  const [formData, setFormData] = useState<ClassProps>({
+    classNumber: 1,
     chapters: [
       {
         chapterName: "",
         subTopics: [
           {
-            subTopicName: "",
-            subTopicContent: "",
+            subtopicName: "",
+            subtopicContent: "",
           },
         ],
       },
     ],
   });
 
-  const handleAddChapter = () => {
-    setFormData({
-      ...formData,
-      chapters: [
-        ...formData.chapters,
-        {
-          chapterName: "",
-          subTopics: [{ subTopicName: "", subTopicContent: "" }],
-        },
-      ],
-    });
-  };
-
   const handleClassChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setFormData({ ...formData, class: e.target.value });
+    setFormData({ ...formData, classNumber: parseInt(e.target.value) });
   };
 
   const handleChapterNameChange = (
@@ -58,8 +37,8 @@ export default function Create() {
   const handleAddSubTopic = (chapterIndex: number) => {
     const newChapters = [...formData.chapters];
     newChapters[chapterIndex].subTopics.push({
-      subTopicName: "",
-      subTopicContent: "",
+      subtopicName: "",
+      subtopicContent: "",
     });
     setFormData({ ...formData, chapters: newChapters });
   };
@@ -76,7 +55,7 @@ export default function Create() {
     subTopicIndex: number
   ) => {
     const newChapters = [...formData.chapters];
-    newChapters[chapterIndex].subTopics[subTopicIndex].subTopicName =
+    newChapters[chapterIndex].subTopics[subTopicIndex].subtopicName =
       e.target.value;
     setFormData({ ...formData, chapters: newChapters });
   };
@@ -87,7 +66,7 @@ export default function Create() {
     subTopicIndex: number
   ) => {
     const newChapters = [...formData.chapters];
-    newChapters[chapterIndex].subTopics[subTopicIndex].subTopicContent =
+    newChapters[chapterIndex].subTopics[subTopicIndex].subtopicContent =
       e.target.value;
     setFormData({ ...formData, chapters: newChapters });
   };
@@ -96,6 +75,24 @@ export default function Create() {
     e.preventDefault();
 
     console.log(formData);
+
+    const res = await addNewContent(formData);
+    if (!res) return toast.error("Failed to add content");
+    toast.success("Content added successfully");
+    setFormData({
+      classNumber: 1,
+      chapters: [
+        {
+          chapterName: "",
+          subTopics: [
+            {
+              subtopicName: "",
+              subtopicContent: "",
+            },
+          ],
+        },
+      ],
+    });
   };
 
   return (
@@ -115,15 +112,15 @@ export default function Create() {
               onChange={(e) => {
                 handleClassChange(e);
               }}
-              value={formData.class}
+              value={formData.classNumber}
               className="p-2 rounded w-fit border border-gray-300"
             >
               <option value="">Select Class</option>
-              <option value="1">Class 1</option>
-              <option value="2">Class 2</option>
-              <option value="3">Class 3</option>
-              <option value="4">Class 4</option>
-              <option value="5">Class 5</option>
+              <option value={1}>Class 1</option>
+              <option value={2}>Class 2</option>
+              <option value={3}>Class 3</option>
+              <option value={4}>Class 4</option>
+              <option value={5}>Class 5</option>
             </select>
           </label>
         </div>
@@ -145,14 +142,6 @@ export default function Create() {
             </label>
 
             {chapter.subTopics.map((subTopic, subTopicIndex) => {
-              const textAreaRef = useRef<HTMLTextAreaElement>(null);
-              useEffect(() => {
-                if (textAreaRef.current !== null) {
-                  textAreaRef.current.style.height = "auto";
-                  textAreaRef.current.style.height =
-                    textAreaRef.current.scrollHeight + "px";
-                }
-              }, [subTopic.subTopicContent]);
               return (
                 <div
                   key={subTopicIndex}
@@ -162,8 +151,8 @@ export default function Create() {
                     SubTopic Name:
                     <input
                       type="text"
-                      name="subTopicName"
-                      value={subTopic.subTopicName}
+                      name="subtopicName"
+                      value={subTopic.subtopicName}
                       onChange={(e) =>
                         handleSubTopicNameChange(e, chapterIndex, subTopicIndex)
                       }
@@ -173,8 +162,8 @@ export default function Create() {
                   <label className="w-full">
                     SubTopic Content:
                     <textarea
-                      name="subTopicContent"
-                      value={subTopic.subTopicContent}
+                      name="subtopicContent"
+                      value={subTopic.subtopicContent}
                       onChange={(e) =>
                         handleSubTopicContentChange(
                           e,
@@ -182,7 +171,7 @@ export default function Create() {
                           subTopicIndex
                         )
                       }
-                      ref={textAreaRef}
+                      rows={4}
                       className="p-2 rounded w-full border border-gray-300 resize-none"
                     />
                   </label>
@@ -205,13 +194,13 @@ export default function Create() {
             </button>
           </div>
         ))}
-        <button
+        {/* <button
           type="button"
           onClick={handleAddChapter}
           className="p-2 bg-green-500 text-white rounded w-fit"
         >
           Add Chapter
-        </button>
+        </button> */}
         <button
           type="submit"
           className="p-2 bg-blue-500 text-white rounded w-fit"

@@ -23,11 +23,7 @@ export const fetchChapters = async (chapterId: string) => {
         chapterName: true,
         subtopics: {
           select: {
-            subtopicContent: {
-              select: {
-                content: true,
-              },
-            },
+            subtopicContent: true,
             subtopicName: true,
             subtopicNumber: true,
             id: true,
@@ -63,11 +59,7 @@ export const fetchSubTopicContent = async (subtopicId: string) => {
       },
       select: {
         subtopicName: true,
-        subtopicContent: {
-          select: {
-            content: true,
-          },
-        },
+        subtopicContent: true,
       },
     });
   } catch (err) {

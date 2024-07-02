@@ -50,3 +50,14 @@ export interface ChatBotProps {
   message: string;
   type: "user" | "model";
 }
+
+export interface ClassProps {
+  classNumber: number;
+  chapters: {
+    chapterName: string;
+    subTopics: {
+      subtopicName: string;
+      subtopicContent: string;
+    }[];
+  }[];
+}

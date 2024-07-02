@@ -42,23 +42,15 @@ model Chapter {
 }
 
 model SubTopic {
-  id              String            @id @default(uuid())
-  subtopicNumber  Int               @default(autoincrement())
+  id              String @id @default(uuid())
+  subtopicNumber  Int    @default(autoincrement())
   subtopicName    String
-  subtopicContent SubTopicContent[]
+  subtopicContent String
 
   subtopicUserProgress SubTopicUserProgress[]
 
   chapterId String
   chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
-}
-
-model SubTopicContent {
-  id      String @id @default(uuid())
-  content String
-
-  subtopicId String
-  subtopic   SubTopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
 }
 
 model SubTopicUserProgress {
