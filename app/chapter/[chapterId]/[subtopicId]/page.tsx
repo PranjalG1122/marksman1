@@ -16,6 +16,11 @@ export default function Chapter({
   const [subTopics, setSubTopics] = useState<SubTopicListProps[]>();
   const [classNum, setClassNum] = useState<number>();
   const [chapterName, setChapterName] = useState<string>();
+  const [quizUserProgress, setQuizUserProgress] = useState<
+    {
+      chapterId: string;
+    }[]
+  >();
 
   useEffect(() => {
     (async () => {
@@ -25,19 +30,22 @@ export default function Chapter({
       setClassNum(res.class.classNumber);
       setSubTopics(res.subtopics);
       setChapterName(res.chapterName);
+      setQuizUserProgress(res.quizUserProgress);
     })();
   }, [params]);
 
   return (
     chapterName &&
     classNum &&
-    subTopics && (
-      <main className="flex flex-row items-center w-screen min-h-screen flex-1 h-full">
+    subTopics &&
+    quizUserProgress && (
+      <main className="flex h-full min-h-screen w-screen flex-1 flex-row items-center">
         <Sidebar
           chapterName={chapterName}
           classNum={classNum}
           subTopics={subTopics}
           params={params}
+          quizUserProgress={quizUserProgress}
         />
         <SubTopicContent
           params={params}

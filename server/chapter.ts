@@ -15,6 +15,15 @@ export const fetchChapters = async (chapterId: string) => {
         id: chapterId,
       },
       select: {
+        quizUserProgress: {
+          where: {
+            userId: user,
+            chapterId,
+          },
+          select: {
+            chapterId: true,
+          },
+        },
         class: {
           select: {
             classNumber: true,
