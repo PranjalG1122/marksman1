@@ -61,3 +61,10 @@ export interface ClassProps {
     }[];
   }[];
 }
+
+export interface QuizProps {
+  question: string;
+  options: string[];
+  correct_option: string;
+  user_option: string;
+}

@@ -1,32 +1,11 @@
 "use server";
 
-import { customPrompt } from "@/lib/prompt";
+import { chatbotPrompt } from "@/lib/prompt";
+import { safetySettings } from "@/lib/safetySettings";
 import { ChatBotProps } from "@/lib/types";
-import {
-  GoogleGenerativeAI,
-  HarmBlockThreshold,
-  HarmCategory,
-} from "@google/generative-ai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || "string");
-const safetySettings = [
-  {
-    category: HarmCategory.HARM_CATEGORY_HARASSMENT,
-    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  },
-  {
-    category: HarmCategory.HARM_CATEGORY_HATE_SPEECH,
-    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  },
-  {
-    category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  },
-  {
-    category: HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
-    threshold: HarmBlockThreshold.BLOCK_MEDIUM_AND_ABOVE,
-  },
-];
 
 export const chat = async (
   messages: ChatBotProps[]
@@ -55,7 +34,7 @@ export const chat = async (
           role: "model",
           parts: [
             {
-              text: customPrompt,
+              text: chatbotPrompt,
             },
           ],
         },

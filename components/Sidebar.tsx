@@ -39,7 +39,7 @@ export default function Sidebar({
                   >
                     <span
                       className={
-                        "flex items-center justify-center h-6 w-6 rounded-full border font-medium " +
+                        "flex items-center justify-center h-6 max-w-6 w-full rounded-full border font-medium " +
                         (subtopic.subtopicUserProgress.length > 0
                           ? "bg-indigo-500 border border-indigo-600 text-indigo-100"
                           : "border-indigo-300")

@@ -23,6 +23,7 @@ model User {
   avatar   PROFILES @default(class1)
 
   subTopicUserProgress SubTopicUserProgress[]
+  quizUserProgress     QuizUserProgress[]
 }
 
 model Class {
@@ -39,6 +40,8 @@ model Chapter {
   classId   String
   class     Class      @relation(fields: [classId], references: [id], onDelete: Cascade)
   subtopics SubTopic[]
+
+  quizUserProgress QuizUserProgress[]
 }
 
 model SubTopic {
@@ -60,4 +63,16 @@ model SubTopicUserProgress {
   subtopic   SubTopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
 
   @@id([userId, subtopicId])
+}
+
+model QuizUserProgress {
+  userId    String
+  chapterId String
+
+  score Int
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chapter Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)
+
+  @@id([userId, chapterId])
 }
