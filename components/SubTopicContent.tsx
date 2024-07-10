@@ -40,7 +40,7 @@ export default function SubTopicContent({
       return;
     }
     const subtopic = subTopics.find(
-      (subtopic) => subtopic.id === params.subtopicId
+      (subtopic) => subtopic.id === params.subtopicId,
     );
     if (!subtopic) {
       return;
@@ -48,51 +48,59 @@ export default function SubTopicContent({
     const index = subTopics.indexOf(subtopic);
     if (index === subTopics.length - 1)
       return router.push(
-        "/chapter/" + params.chapterId + "/" + subTopics[0].id
+        "/chapter/" + params.chapterId + "/" + subTopics[0].id,
       );
 
     return router.push(
-      "/chapter/" + params.chapterId + "/" + subTopics[index + 1].id
+      "/chapter/" + params.chapterId + "/" + subTopics[index + 1].id,
     );
   };
 
   return (
-    <div className="w-full flex flex-col items-center">
-      <nav className="sticky top-0 w-full h-12 flex flex-row items-center justify-between px-4 border-b border-b-gray-300">
+    <div className="flex w-full flex-col items-center overflow-y-auto">
+      <nav className="sticky top-0 flex h-12 w-full flex-row items-center justify-between border-b border-b-gray-300 bg-white px-4">
         <div className="flex flex-row items-center gap-4">
           <button
             onClick={() => {
               router.back();
             }}
           >
-            <ArrowLeft className="w-5 h-5" />
+            <ArrowLeft className="h-5 w-5" />
           </button>
-          <h1 className="text-xl font-medium ">{subTopicTitle}</h1>
+          <h1 className="text-xl font-medium">{subTopicTitle}</h1>
         </div>
         {subTopics.find((subtopic) => subtopic.id === params.subtopicId)
           ?.subtopicUserProgress.length === 0 && (
           <Button onClick={handleMarkDone}>Mark as completed</Button>
         )}
       </nav>
-      <div className="min-h-container w-full flex flex-col items-start overflow-y-auto max-w-3xl gap-4 py-4">
+      <div className="min-h-container flex w-full max-w-3xl flex-col items-start gap-4 py-4">
         {subTopicData ? (
-          <p className="text-lg">{subTopicData}</p>
+          <div className="flex w-full flex-col gap-4 text-lg">
+            {subTopicData.split(".").map((line, i) => (
+              <div className={"w-full p-2 rounded " + (
+                  i % 3 === 0 ? "bg-indigo-600 text-white" : "bg-gray-100"
+              )}>
+                <p key={i}>{line}.</p>
+              </div>
+            ))}
+          </div>
         ) : (
-          <ul className="flex flex-col items-startw-full p-4 gap-4">
+          <ul className="items-startw-full flex flex-col gap-4 p-4">
             {[...Array(4)].map((_, i) => (
               <li
                 key={i}
-                className="flex flex-col items-start gap-2 w-full p-4 rounded"
+                className="flex w-full flex-col items-start gap-2 rounded p-4"
               >
-                <span className="block w-full h-4 bg-gray-100 animate-pulse rounded" />
-                <span className="block w-96 h-4 bg-gray-100 animate-pulse rounded" />{" "}
-                <span className="block w-full h-4 bg-gray-100 animate-pulse rounded" />
-                <span className="block w-96 h-4 bg-gray-100 animate-pulse rounded" />
+                <span className="block h-4 w-full animate-pulse rounded bg-gray-100" />
+                <span className="block h-4 w-96 animate-pulse rounded bg-gray-100" />{" "}
+                <span className="block h-4 w-full animate-pulse rounded bg-gray-100" />
+                <span className="block h-4 w-96 animate-pulse rounded bg-gray-100" />
               </li>
             ))}
           </ul>
         )}
-        <div className="flex justify-start w-full">
+        <div className="flex w-full justify-start">
           <SpeakerButton
             onClick={function (): void {
               toast.success("playing...");
