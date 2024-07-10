@@ -15,9 +15,9 @@ const Home: React.FC = () => {
     <div className="flex min-h-screen flex-col items-center w-full">
       <Navbar />
       <Main />
-      <Courses />
-      <Filler1 />
       <Features />
+      <Filler1 />
+      <Courses />
       <Contact />
       <Background />
     </div>
