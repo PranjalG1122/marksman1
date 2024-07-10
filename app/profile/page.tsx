@@ -2,56 +2,48 @@
 
 import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
+import { fetchUserProgress } from '@/server/user';
+import toast from 'react-hot-toast';
+import { UserProgress } from '@/lib/types';
 
 const UserProfile = () => {
-  // Mock data for demonstration purposes
-  const [progress, setProgress] = useState([
-    { chapter: 'Chapter 1', topicsCompleted: 5, totalTopics: 10 },
-    { chapter: 'Chapter 2', topicsCompleted: 3, totalTopics: 8 },
-    // Add more chapters as needed
-  ]);
+  const [userProgress, setUserProgress] = useState<UserProgress>()
 
-  const [quizScores, setQuizScores] = useState([
-    { quiz: 'Quiz 1', score: 80, date: '2024-01-01' },
-    { quiz: 'Quiz 2', score: 90, date: '2024-02-01' },
-    // Add more quizzes as needed
-  ]);
-
-  // Fetch user data from API when the component mounts
+  
   useEffect(() => {
-    // Replace the below lines with actual API calls
-    // fetchUserProgress().then(setProgress);
-    // fetchUserQuizScores().then(setQuizScores);
+    (async () => {
+      const res = await fetchUserProgress();
+      if(!res) return toast.error('Failed to fetch user progress');
+      setUserProgress(res);
+    })()
   }, []);
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-
+    <div className="py-12 w-full flex flex-col items-center mx-auto">
+      <Navbar />
       <h1 className="text-3xl font-bold mb-6 py-8">User Profile</h1>
-
-      <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Progress</h2>
-        <div className="space-y-4">
-          {progress.map((item, index) => (
-            <div key={index} className="p-4 bg-white rounded-lg shadow-md">
-              <h3 className="text-xl font-medium">{item.chapter}</h3>
-              <p className="text-gray-600">
-                Topics Completed: {item.topicsCompleted} / {item.totalTopics}
-              </p>
+      <section className="w-full max-w-3xl flex flex-col gap-4">
+        <h2 className="text-2xl font-semibold">Progress</h2>
+        <div className=" flex flex-col w-full gap-2">
+          {userProgress && userProgress.quizUserProgress.map((quizProgress, i) => (
+            <div key={i} className="p-4 bg-white rounded-lg shadow-md">
+              <h3 className="text-xl font-medium">{quizProgress.chapter.chapterName}</h3>
+            
               <div className="w-full bg-gray-200 rounded-full h-4 mt-2">
                 <div
                   className="bg-indigo-500 h-4 rounded-full"
                   style={{
-                    width: `${(item.topicsCompleted / item.totalTopics) * 100}%`,
+                    width: `${(quizProgress.score / 10) * 100}%`,
                   }}
                 ></div>
+                <p>{quizProgress.score} / 10</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      <section>
+      {/* <section>
         <h2 className="text-2xl font-semibold mb-4">Quiz Scores</h2>
         <div className="space-y-4">
           {quizScores.map((item, index) => (
@@ -62,7 +54,7 @@ const UserProfile = () => {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

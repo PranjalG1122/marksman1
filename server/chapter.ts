@@ -56,7 +56,8 @@ export const fetchChapters = async (chapterId: string) => {
     return chapter;
   } catch (err) {
     console.error(err);
-    if (err instanceof Error) return null;
+    return null;
+    
   }
 };
 

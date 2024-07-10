@@ -68,3 +68,19 @@ export interface QuizProps {
   correct_option: string;
   user_option: string;
 }
+
+export interface UserProgress {
+  name: string;
+    email: string;
+    avatar: PROFILES;
+    subTopicUserProgress: {
+        userId: string;
+        subtopicId: string;
+    }[];
+    quizUserProgress: {
+        score: number;
+        chapter: {
+            chapterName: string;
+        };
+    }[];
+}

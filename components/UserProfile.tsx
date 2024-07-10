@@ -5,7 +5,7 @@ import { fetchUserInfo, signOutUser } from "@/server/user";
 import { UserProfileProps } from "@/lib/types";
 
 import class1 from "@/public/mascots/class1.png";
-import { ChevronDown, LogOut, Settings } from "react-feather";
+import { ChevronDown, LogOut, Settings, User } from "react-feather";
 import { Button, variants } from "@/components/Button";
 import Link from "next/link";
 
@@ -42,10 +42,10 @@ export default function UserProfile() {
         <>
           <div className="bg-white rounded py-2 shadow-sm border border-gray-300 absolute top-8 right-0 md:w-48 w-full z-20">
             <Link
-              href="/settings"
+              href="/profile"
               className={variants({ variant: "dropdown" })}
             >
-              <Settings className="h-4 w-4" /> Settings
+              <User className="h-4 w-4" /> Profile
             </Link>
             <Button
               variant="dropdown"
