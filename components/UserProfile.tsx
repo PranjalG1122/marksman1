@@ -5,7 +5,7 @@ import { fetchUserInfo, signOutUser } from "@/server/user";
 import { UserProfileProps } from "@/lib/types";
 
 import class1 from "@/public/mascots/class1.png";
-import { ChevronDown, LogOut, Settings, User } from "react-feather";
+import { ChevronDown, LogOut, User } from "react-feather";
 import { Button, variants } from "@/components/Button";
 import Link from "next/link";
 

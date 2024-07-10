@@ -70,7 +70,7 @@ export default function Sidebar({
             <span
               className={
                 "flex h-6 w-full max-w-6 items-center justify-center rounded-full border font-medium " +
-                (quizUserProgress.length > 0
+                (quizUserProgress.length > 0  
                   ? "border border-indigo-600 bg-indigo-500 text-indigo-100"
                   : "border-indigo-300")
               }

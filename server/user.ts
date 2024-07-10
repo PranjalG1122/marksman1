@@ -59,32 +59,30 @@ export const signOutUser = () => {
 export const fetchUserProgress = async () => {
   try {
     const token = await getUserInfo();
-  if (!token) return null;
+    if (!token) return null;
 
     return await prisma.user.findUniqueOrThrow({
       where: {
         id: token,
       },
       select: {
-          name: true,
-          avatar: true,
-          email: true,
-          quizUserProgress: {
-            select: {
-              score: true,
-              chapter: {
-                select: {
-                  chapterName: true,
-
-                }
-              }
-            }
+        name: true,
+        avatar: true,
+        email: true,
+        quizUserProgress: {
+          select: {
+            score: true,
+            chapter: {
+              select: {
+                chapterName: true,
+              },
+            },
           },
-          subTopicUserProgress: true
-      }
-    })
-  } catch  (err) {
-    console.error(err)
+        },
+      },
+    });
+  } catch (err) {
+    console.error(err);
     return null;
   }
-}
+};

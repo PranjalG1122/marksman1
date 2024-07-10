@@ -38,7 +38,7 @@ export default function Quiz({ params }: { params: { chapterId: string } }) {
                 correct_option: q.correct_option,
                 user_option: "",
               };
-            })
+            }),
           );
         } catch (err) {
           console.error(err);
@@ -50,7 +50,7 @@ export default function Quiz({ params }: { params: { chapterId: string } }) {
 
   const handleSubmit = async () => {
     const correctAnswers = quiz.filter(
-      (q) => q.correct_option === q.user_option
+      (q) => q.correct_option === q.user_option,
     ).length;
 
     const res = await submitQuiz(params.chapterId, correctAnswers);
@@ -59,16 +59,16 @@ export default function Quiz({ params }: { params: { chapterId: string } }) {
   };
 
   return (
-    <main className="w-full h-full flex flex-col items-center">
+    <main className="flex h-full w-full flex-col items-center">
       <Navbar />
       {!quizCompleted ? (
-        <div className="w-full max-w-3xl py-16 flex flex-col gap-6">
+        <div className="flex w-full max-w-3xl flex-col gap-6 py-16">
           {quiz && (
             <>
-              <ul className="flex flex-col w-full gap-6">
+              <ul className="flex w-full flex-col gap-6">
                 {quiz.map((question, questionIndex) => (
                   <li key={questionIndex} className="flex flex-col gap-2">
-                    <h2 className="font-semibold text-lg">
+                    <h2 className="text-lg font-semibold">
                       {question.question}
                     </h2>
                     <ul className="grid grid-cols-2 grid-rows-2 gap-2">
@@ -76,7 +76,7 @@ export default function Quiz({ params }: { params: { chapterId: string } }) {
                         <li key={optionIndex} className="w-full">
                           <button
                             className={
-                              "px-4 py-2 rounded border border-indigo-500 w-full h-full flex-1 hover:bg-indigo-500 text-start hover:text-white " +
+                              "h-full w-full flex-1 rounded border border-indigo-500 px-4 py-2 text-start hover:bg-indigo-500 hover:text-white " +
                               (question.user_option === option
                                 ? "bg-indigo-500 text-white"
                                 : "bg-white text-black")
@@ -104,7 +104,7 @@ export default function Quiz({ params }: { params: { chapterId: string } }) {
           )}
         </div>
       ) : (
-        <div className="w-full max-w-3xl py-16 flex flex-col gap-6">
+        <div className="flex w-full max-w-3xl flex-col gap-6 py-16">
           {progressData && (
             <>
               <h1 className="text-3xl font-semibold">Quiz Completed</h1>
