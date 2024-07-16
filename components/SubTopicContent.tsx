@@ -78,9 +78,7 @@ export default function SubTopicContent({
         {subTopicData ? (
           <div className="flex w-full flex-col gap-4 text-lg">
             {subTopicData.split(".").map((line, i) => (
-              <div className={"w-full p-2 rounded " + (
-                  i % 3 === 0 ? "bg-indigo-600 text-white" : "bg-gray-100"
-              )}>
+              <div className={"w-full p-2 rounded" }>
                 <p key={i}>{line}.</p>
               </div>
             ))}
